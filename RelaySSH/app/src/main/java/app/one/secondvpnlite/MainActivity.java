@@ -85,71 +85,17 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
 
 
     public static void runOnUI(Runnable runnable) {
-        UIHandler.post(runnable);
-    }
-    public static void setButtonStatus(String status){
-        switch (status){
-            case "INICIANDO":
-                MainActivity.runOnUI(() -> start_button.setText(R.string.stop));
-                try{
-                    start_button.setEnabled(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "CONECTANDO":
-                MainActivity.runOnUI(() -> start_button.setText(R.string.stop));
-                try{
-                    start_button.setEnabled(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "CONECTADO":
-                MainActivity.runOnUI(() -> start_button.setText(R.string.stop));
-                try{
-                    start_button.setEnabled(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "DESCONECTADO":
-                MainActivity.runOnUI(() -> {
-                    enableInterfaceOnConnect();
-                    start_button.setText(R.string.start);
-                    try{
-                        start_button.setEnabled(true);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-                break;
-            case "PARANDO":
-                //disableInterfaceOnConnect();
-                MainActivity.runOnUI(() -> {
-                    start_button.setText(R.string.stopping);
-                    try{
-                        start_button.setEnabled(false);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-                break;
-        }
-
+        RelayMainUi.runOnUI(runnable);
     }
 
-    public static void updateUIAfterImport(){
-        if (!TunnelManager.isServiceRunning){
-        //if (!SecondVPN.getCurrentVpnStatus().equals("CONECTADO")){
-            MainActivity.runOnUI(() -> {
-               updateLayoutWithConfig1();
-               updateLayoutWithConfig2();
-               updateLayoutWithConfig3();
-            });
-        }
-
+    public static void setButtonStatus(String status) {
+        RelayMainUi.setButtonStatus(status);
     }
+
+    public static void updateUIAfterImport() {
+        RelayMainUi.updateUIAfterImport();
+    }
+
     @SuppressLint("StaticFieldLeak")
     public static Button start_button ;
     @SuppressLint("StaticFieldLeak")
@@ -464,209 +410,16 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         }
     }
 
-    private static void updateLayoutWithConfig1(){
-        if (!SecondVPN.getIsCustomFileIsLocked() && SecondVPN.getConnectionMode().equals("MODO_HTTP")){
-            payload_after_tls.setEnabled(false);
-            payload_after_tls.setVisibility(View.GONE);
-            direct_mode.setEnabled(true);
-            direct_mode.setVisibility(View.VISIBLE);
-            modo_http.setChecked(true);
-            modo_https.setChecked(false);
-            custom_sni_layout.setVisibility(View.GONE);
-
-            if (SecondVPN.isHTTPDirect()){
-                direct_mode.setChecked(true);
-                servidor_proxy_layout.setVisibility(View.GONE);
-            }else{
-                direct_mode.setChecked(false);
-                servidor_proxy_layout.setVisibility(View.VISIBLE);
-            }
-
-        }
-        if (!SecondVPN.getIsCustomFileIsLocked() && SecondVPN.getConnectionMode().equals("MODO_HTTPS")){
-            payload_after_tls.setEnabled(true);
-            payload_after_tls.setVisibility(View.VISIBLE);
-            direct_mode.setEnabled(false);
-            modo_http.setChecked(false);
-            direct_mode.setVisibility(View.GONE);
-            modo_https.setChecked(true);
-            custom_sni_layout.setVisibility(View.VISIBLE);
-            servidor_proxy_layout.setVisibility(View.GONE);
-            if (SecondVPN.isPayloadAfterTLS()){
-                payload_layout.setVisibility(View.VISIBLE);
-                payload_after_tls.setChecked(true);
-            }else{
-                  payload_after_tls.setChecked(false);
-                payload_layout.setVisibility(View.GONE);
-
-            }
-        }
+    private static void updateLayoutWithConfig1() {
+        RelayMainUi.updateLayoutWithConfig1();
     }
 
-    public static void updateLayoutWithConfig2(){
-        if (SecondVPN.getConnectionMode().equals("MODO_HTTPS")){
-            modo_https.setChecked(true);
-            modo_http.setChecked(false);
-            direct_mode.setVisibility(View.GONE);
-            payload_after_tls.setVisibility(View.VISIBLE);
-            custom_sni_layout.setVisibility(View.VISIBLE);
-
-            if (SecondVPN.isPayloadAfterTLS()){
-                payload_after_tls.setChecked(true);
-            }else{
-                payload_after_tls.setChecked(false);
-            }
-        }
-
-        if (SecondVPN.getConnectionMode().equals("MODO_HTTP")){
-            modo_https.setChecked(false);
-            modo_http.setChecked(true);
-
-            direct_mode.setVisibility(View.VISIBLE);
-            payload_after_tls.setVisibility(View.GONE);
-            custom_sni_layout.setVisibility(View.GONE);
-
-            if (SecondVPN.isHTTPDirect()){
-                direct_mode.setChecked(true);
-
-            }else{
-                direct_mode.setChecked(false);
-            }
-        }
+    public static void updateLayoutWithConfig2() {
+        RelayMainUi.updateLayoutWithConfig2();
     }
 
-    private static void updateLayoutWithConfig3(){
-        if (SecondVPN.getIsCustomFileIsLocked()){
-            if (SecondVPN.isLockLoginEdit()){
-                user_and_pass.setEnabled(false);
-                user_and_pass.setText(SecondVPN.getUsuarioAndPass().replaceAll(".", "*"));
-            }else{
-                user_and_pass.setText(SecondVPN.getUsuarioAndPass());
-                user_and_pass.setEnabled(true);
-            }
-
-
-            servidor_ssh.setEnabled(false);
-            servidor_ssh.setText(SecondVPN.getServidorSSHDomain().replaceAll(".","*"));
-
-            servidor_proxy.setEnabled(false);
-            servidor_proxy.setText(SecondVPN.getProxyIPDomain().replaceAll(".","*"));
-
-            custom_sni.setEnabled(false);
-            custom_sni.setText(SecondVPN.getSNI().replaceAll(".", "*"));
-
-            custom_payload.setEnabled(false);
-            custom_payload.setText(SecondVPN.getPayloadKey().replaceAll(".","*"));
-
-
-            if (modo_http.isChecked()){
-                if (direct_mode.isChecked()){
-                    servidor_proxy_layout.setVisibility(View.GONE);
-                    direct_mode.setChecked(true);
-                    direct_mode.setEnabled(false);
-                    payload_layout.setVisibility(View.VISIBLE);
-                    payload_after_tls.setVisibility(View.GONE);
-                    direct_mode.setVisibility(View.VISIBLE);
-
-                }else{
-                    servidor_proxy_layout.setVisibility(View.VISIBLE);
-                    payload_layout.setVisibility(View.VISIBLE);
-                    payload_after_tls.setVisibility(View.GONE);
-                    direct_mode.setVisibility(View.VISIBLE);
-                    direct_mode.setChecked(false);
-                    direct_mode.setEnabled(false);
-                }
-            }
-            if (modo_https.isChecked()) {
-                if (payload_after_tls.isChecked()){
-                    servidor_proxy_layout.setVisibility(View.GONE);
-                    payload_after_tls.setChecked(true);
-                    payload_after_tls.setEnabled(false);
-                    payload_layout.setVisibility(View.VISIBLE);
-                    payload_after_tls.setVisibility(View.VISIBLE);
-
-                }else{
-                    servidor_proxy_layout.setVisibility(View.GONE);
-                    payload_after_tls.setChecked(false);
-                    payload_after_tls.setEnabled(false);
-                    payload_layout.setVisibility(View.GONE);
-                    payload_after_tls.setVisibility(View.VISIBLE);
-                }
-            }
-
-            modo_http.setEnabled(false);
-            modo_https.setEnabled(false);
-
-
-            config_msg.setEnabled(true);
-            config_msg.setVisibility(View.VISIBLE);
-            config_msg.setText(Html.fromHtml(SecondVPN.getConfigMsgText()));
-
-        }else if (!SecondVPN.getIsCustomFileIsLocked()){
-            servidor_ssh.setEnabled(true);
-            servidor_ssh.setText(SecondVPN.getServidorSSHDomain());
-
-            servidor_proxy.setEnabled(true);
-            servidor_proxy.setText(SecondVPN.getProxyIPDomain());
-
-            custom_sni.setEnabled(true);
-            custom_sni.setText(SecondVPN.getSNI());
-
-            custom_payload.setEnabled(true);
-            custom_payload.setText(SecondVPN.getPayloadKey());
-
-            modo_http.setEnabled(true);
-            modo_https.setEnabled(true);
-
-            payload_after_tls.setEnabled(true);
-            direct_mode.setEnabled(true);
-
-            user_and_pass.setEnabled(true);
-            user_and_pass.setText(SecondVPN.getUsuarioAndPass());
-
-            config_msg.setEnabled(true);
-            config_msg.setVisibility(View.VISIBLE);
-            config_msg.setText(Html.fromHtml(SecondVPN.getConfigMsgText()));
-
-           /* if (SecondVPN.getConnectionMode().equals("MODO_HTTP")){
-                if (SecondVPN.isHTTPDirect()){
-                    servidor_proxy_layout.setVisibility(View.GONE);
-                    direct_mode.setChecked(true);
-                    direct_mode.setEnabled(false);
-                    payload_layout.setVisibility(View.VISIBLE);
-                    payload_after_tls.setVisibility(View.GONE);
-                    direct_mode.setVisibility(View.VISIBLE);
-
-                }else{
-                    servidor_proxy_layout.setVisibility(View.VISIBLE);
-                    payload_layout.setVisibility(View.VISIBLE);
-                    payload_after_tls.setVisibility(View.GONE);
-                    direct_mode.setVisibility(View.VISIBLE);
-                    direct_mode.setChecked(false);
-                    direct_mode.setEnabled(false);
-                }
-            }
-            if (SecondVPN.getConnectionMode().equals("MODO_HTTPS")){
-                if (SecondVPN.isPayloadAfterTLS()){
-                    servidor_proxy_layout.setVisibility(View.GONE);
-                    payload_after_tls.setChecked(true);
-                    payload_after_tls.setEnabled(false);
-                    payload_layout.setVisibility(View.VISIBLE);
-                    payload_after_tls.setVisibility(View.VISIBLE);
-
-                }else{
-                    servidor_proxy_layout.setVisibility(View.GONE);
-                    payload_after_tls.setChecked(false);
-                    payload_after_tls.setEnabled(false);
-                    payload_layout.setVisibility(View.GONE);
-                    payload_after_tls.setVisibility(View.VISIBLE);
-                }
-            }*/
-
-        }
-
-
-
+    private static void updateLayoutWithConfig3() {
+        RelayMainUi.updateLayoutWithConfig3();
     }
 
     private void showStartMsg() {
@@ -1275,86 +1028,12 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         }
     }
 
-    public static void disableInterfaceOnConnect(){
-        try{
-            if (servidor_ssh_layout.getVisibility() == View.VISIBLE) {
-                servidor_ssh.setEnabled(false);
-            }
-            if (servidor_proxy_layout.getVisibility() == View.VISIBLE) {
-                servidor_proxy.setEnabled(false);
-            }
-            if (user_and_pass_layout.getVisibility() == View.VISIBLE) {
-                user_and_pass.setEnabled(false);
-            }
-            if (payload_layout.getVisibility() == View.VISIBLE) {
-                custom_payload.setEnabled(false);
-            }
-            if (direct_mode.getVisibility() == View.VISIBLE) {
-                direct_mode.setEnabled(false);
-            }
-            if (payload_after_tls.getVisibility() == View.VISIBLE) {
-                payload_after_tls.setEnabled(false);
-            }
-            if (custom_sni.getVisibility() == View.VISIBLE) {
-                custom_sni.setEnabled(false);
-            }
-            if (modo_http.getVisibility() == View.VISIBLE) {
-                modo_http.setEnabled(false);
-            }
-            if (modo_https.getVisibility() == View.VISIBLE) {
-                modo_https.setEnabled(false);
-            }
-            if (modo_https.getVisibility() == View.VISIBLE) {
-                modo_https.setEnabled(false);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public static void disableInterfaceOnConnect() {
+        RelayMainUi.disableInterfaceOnConnect();
     }
 
-
-    public static void enableInterfaceOnConnect(){
-        try{
-            if (SecondVPN.isLockLoginEdit()){
-                user_and_pass.setEnabled(false);
-            }else{
-                user_and_pass.setEnabled(true);
-            }
-            if (!SecondVPN.getIsCustomFileIsLocked()){
-                if (servidor_ssh_layout.getVisibility() == View.VISIBLE) {
-                    servidor_ssh.setEnabled(true);
-                }
-                if (servidor_proxy_layout.getVisibility() == View.VISIBLE) {
-                    servidor_proxy.setEnabled(true);
-                }
-                if (user_and_pass_layout.getVisibility() == View.VISIBLE) {
-                    user_and_pass.setEnabled(true);
-                }
-                if (payload_layout.getVisibility() == View.VISIBLE) {
-                    custom_payload.setEnabled(true);
-                }
-                if (direct_mode.getVisibility() == View.VISIBLE) {
-                    direct_mode.setEnabled(true);
-                }
-                if (payload_after_tls.getVisibility() == View.VISIBLE) {
-                    payload_after_tls.setEnabled(true);
-                }
-                if (custom_sni.getVisibility() == View.VISIBLE) {
-                    custom_sni.setEnabled(true);
-                }
-                if (modo_http.getVisibility() == View.VISIBLE) {
-                    modo_http.setEnabled(true);
-                }
-                if (modo_https.getVisibility() == View.VISIBLE) {
-                    modo_https.setEnabled(true);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public static void enableInterfaceOnConnect() {
+        RelayMainUi.enableInterfaceOnConnect();
     }
 
     /**
