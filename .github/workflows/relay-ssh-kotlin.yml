@@ -35,4 +35,4 @@ jobs:
 
       - name: Build Relay SSH debug APK
         working-directory: RelaySSH
-        run: ./gradlew --no-daemon assembleDebug
+        run: bash ./gradlew --no-daemon assembleDebug
