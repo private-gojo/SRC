@@ -45,7 +45,7 @@ object IPUtil {
     }
 
     private fun prefix2mask(bits: Int): Long =
-        (0xFFFFFFFF00000000L shr bits) and 0xFFFFFFFFL
+        (-0x100000000L shr bits) and 0xFFFFFFFFL
 
     private fun inet2long(address: InetAddress?): Long {
         var result = 0L
