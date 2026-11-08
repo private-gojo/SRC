@@ -223,15 +223,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     }
 
     private void stopVPNService(){
-        try{
-            TunnelManager.stopForwarderSocks();
-            TunnelManager.isToStopService = true;
-            mTunnelManager = new TunnelManager();
-            mTunnelThread = new Thread(mTunnelManager);
-            mTunnelThread.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        RelayMainVpnFlow.stopTunnel(this::startTunnelManagerFromFlow);
     }
 
     private void startVPNService() {
@@ -523,53 +515,16 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     }
 
     private void setStartOrStopVPN(MainActivity mainActivity) {
-        if (!start_button.getText().toString().equals(this.getString(R.string.stop))) {
-            //SET PREFERENCES
-            savePreferences();
-            startVPNService();
-            Log.d("MainActivity","Start VPN Tunnel");
-        }else{
-            stopVPNService();
-            Log.d("MainActivity","Stop VPN Tunnel");
-        }
+        RelayMainVpnFlow.setStartOrStop(
+                this,
+                this::savePreferences,
+                this::startVPNService,
+                this::stopVPNService
+        );
     }
 
     private void savePreferences(){
-        if (SecondVPN.getIsCustomFileIsLocked()){
-            if (!SecondVPN.isLockLoginEdit()){
-                app_prefs.edit().putString("SSH_AUTH_DATA",user_and_pass.getText().toString()).apply();
-            }
-        }
-        if (!SecondVPN.getIsCustomFileIsLocked()){
-            //SALVA USUARIO E SENHA
-            app_prefs.edit().putString("SSH_AUTH_DATA",user_and_pass.getText().toString()).apply();
-            //SALVA POR MODO DE CONEXAO
-            if (modo_http.isChecked()){
-                if (direct_mode.isChecked()){
-                    app_prefs.edit().putString("SSH_SERVER_DOMAIN",servidor_ssh.getText().toString()).apply();
-                    app_prefs.edit().putString("PAYLOAD_KEY",custom_payload.getText().toString()).apply();
-
-                }else{
-                    app_prefs.edit().putString("SSH_SERVER_DOMAIN",servidor_ssh.getText().toString()).apply();
-                    app_prefs.edit().putString("PAYLOAD_KEY",custom_payload.getText().toString()).apply();
-                    app_prefs.edit().putString("PROXY_IP_DOMAIN",servidor_proxy.getText().toString()).apply();
-                }
-
-                //}else if (SecondVPN.getConnectionMode().equals("MODO_HTTPS")){
-            }
-            if (modo_https.isChecked()){
-                if (payload_after_tls.isChecked()){
-                    app_prefs.edit().putString("SSH_SERVER_DOMAIN",servidor_ssh.getText().toString()).apply();
-                    app_prefs.edit().putString("PAYLOAD_KEY",custom_payload.getText().toString()).apply();
-                    app_prefs.edit().putString("CUSTOM_SNI",custom_sni.getText().toString()).apply();
-
-                }else{
-                    app_prefs.edit().putString("SSH_SERVER_DOMAIN",servidor_ssh.getText().toString()).apply();
-                    app_prefs.edit().putString("CUSTOM_SNI",custom_sni.getText().toString()).apply();
-
-                }
-            }
-        }
+        RelayMainPreferences.save();
     }
 
     public static void disableInterfaceOnConnect() {

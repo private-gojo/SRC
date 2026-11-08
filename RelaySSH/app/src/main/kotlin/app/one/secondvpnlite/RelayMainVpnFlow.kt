@@ -90,4 +90,34 @@ object RelayMainVpnFlow {
             ).show()
         }
     }
-}
+
+
+    @JvmStatic
+    fun stopTunnel(startTunnelManager: Runnable) {
+        try {
+            TunnelManager.stopForwarderSocks()
+            TunnelManager.isToStopService = true
+            startTunnelManager.run()
+        } catch (error: Exception) {
+            error.printStackTrace()
+        }
+    }
+
+    @JvmStatic
+    fun setStartOrStop(
+        activity: MainActivity,
+        savePreferences: Runnable,
+        startVpn: Runnable,
+        stopVpn: Runnable
+    ) {
+        if (!MainActivity.start_button.text.toString()
+                .equals(activity.getString(R.string.stop))
+        ) {
+            savePreferences.run()
+            startVpn.run()
+            android.util.Log.d("MainActivity", "Start VPN Tunnel")
+        } else {
+            stopVpn.run()
+            android.util.Log.d("MainActivity", "Stop VPN Tunnel")
+        }
+    }
