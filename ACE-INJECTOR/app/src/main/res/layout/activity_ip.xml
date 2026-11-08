@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_height="wrap_content"
+	android:layout_width="wrap_content">
+
+	<RelativeLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:gravity="top|center">
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="fill_parent"
+				android:layout_height="100dp"
+				android:gravity="left|center"
+				android:background="@color/colorPrimary">
+
+				<ImageView
+					android:src="@drawable/ace_launchers"
+					android:layout_width="50dp"
+					android:layout_height="50dp"
+					android:layout_marginLeft="15dp"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Check IP"
+					android:textAppearance="?android:attr/textAppearanceLarge"
+					android:layout_marginLeft="10dp"
+					android:textColor="#FFFFFFFF"
+					android:textStyle="bold"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:gravity="center"
+				android:padding="15dp">
+
+				<LinearLayout
+					android:layout_height="wrap_content"
+					android:layout_width="fill_parent"
+					android:orientation="horizontal">
+
+					<LinearLayout
+						android:layout_height="match_parent"
+						android:layout_width="fill_parent"
+						android:orientation="vertical">
+
+						<android.support.v7.widget.CardView
+							android:layout_height="wrap_content"
+							android:layout_width="fill_parent"
+							app:cardBackgroundColor="@color/colorPrimary"
+							android:orientation="vertical">
+
+							<LinearLayout
+								android:layout_height="wrap_content"
+								android:layout_width="fill_parent"
+								android:orientation="vertical"
+								android:paddingLeft="10dp"
+								android:paddingRight="10dp"
+								android:paddingBottom="10dp"
+								android:paddingTop="10dp">
+
+								<LinearLayout
+									android:layout_height="wrap_content"
+									android:layout_width="fill_parent"
+									android:orientation="horizontal"
+									android:gravity="left|center">
+
+									<TextView
+										android:layout_height="wrap_content"
+										android:layout_width="wrap_content"
+										android:text="IP:"
+										android:layout_marginRight="10dp"
+										android:textColor="#ffffff"
+										android:textStyle="bold"
+										android:textSize="15sp"
+										android:gravity="center"/>
+
+									<TextView
+										android:id="@+id/TextView4"
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_alignParentTop="true"
+										android:layout_centerHorizontal="true"
+										android:layout_gravity="center"
+										android:textSize="20sp"
+										android:gravity="center"
+										android:textColor="#ffffff"/>
+
+								</LinearLayout>
+
+								<LinearLayout
+									android:layout_height="wrap_content"
+									android:layout_width="fill_parent"
+									android:orientation="horizontal"
+									android:layout_marginTop="10dp">
+
+									<TextView
+										android:id="@+id/Ipd"
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:text="ISP:"
+										android:layout_marginRight="10dp"
+										android:textColor="#ffffff"
+										android:textStyle="bold"
+										android:textSize="15sp"
+										android:gravity="center"/>
+
+									<TextView
+										android:layout_height="wrap_content"
+										android:layout_width="wrap_content"
+										android:id="@+id/Txisp"
+										android:textSize="15sp"
+										android:gravity="center"
+										android:textColor="#ffffff"/>
+
+								</LinearLayout>
+
+								<LinearLayout
+									android:layout_height="wrap_content"
+									android:layout_width="fill_parent"
+									android:orientation="horizontal"
+									android:layout_marginTop="10dp">
+
+									<TextView
+										android:layout_height="wrap_content"
+										android:layout_width="wrap_content"
+										android:text="Country:"
+										android:layout_marginRight="10dp"
+										android:id="@+id/TextView8"
+										android:textColor="#ffffff"
+										android:textStyle="bold"
+										android:textSize="15sp"
+										android:gravity="center"/>
+
+									<TextView
+										android:layout_height="wrap_content"
+										android:layout_width="wrap_content"
+										android:id="@+id/Txcountry"
+										android:textSize="15sp"
+										android:gravity="center"
+										android:textColor="#ffffff"/>
+
+								</LinearLayout>
+
+								<LinearLayout
+									android:layout_height="wrap_content"
+									android:layout_width="fill_parent"
+									android:orientation="horizontal"
+									android:layout_marginTop="10dp">
+
+									<TextView
+										android:layout_height="wrap_content"
+										android:layout_width="wrap_content"
+										android:text="State:"
+										android:layout_marginRight="10dp"
+										android:id="@+id/TextView9"
+										android:textColor="#ffffff"
+										android:textStyle="bold"
+										android:textSize="15sp"
+										android:gravity="center"/>
+
+									<TextView
+										android:layout_height="wrap_content"
+										android:layout_width="wrap_content"
+										android:id="@+id/Txstate"
+										android:textSize="15sp"
+										android:gravity="center"
+										android:textColor="#ffffff"/>
+
+								</LinearLayout>
+
+								<LinearLayout
+									android:layout_height="wrap_content"
+									android:layout_width="fill_parent"
+									android:orientation="horizontal"
+									android:layout_marginTop="10dp">
+
+									<TextView
+										android:layout_height="wrap_content"
+										android:layout_width="wrap_content"
+										android:text="City:"
+										android:layout_marginRight="10dp"
+										android:id="@+id/TextView10"
+										android:textColor="#ffffff"
+										android:textStyle="bold"
+										android:textSize="15sp"
+										android:gravity="center"/>
+
+									<TextView
+										android:layout_height="wrap_content"
+										android:layout_width="wrap_content"
+										android:id="@+id/Txcity"
+										android:textSize="15sp"
+										android:gravity="center"
+										android:textColor="#ffffff"/>
+
+								</LinearLayout>
+
+							</LinearLayout>
+
+						</android.support.v7.widget.CardView>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</RelativeLayout>
+	
+	<com.google.android.gms.ads.AdView
+		xmlns:ads="http://schemas.android.com/apk/res-auto"
+		android:id="@+id/adBannerMainView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_alignParentBottom="true"
+		android:layout_marginTop="10dp"
+		ads:adSize="LARGE_BANNER"
+		ads:adUnitId="ca-app-pub-4327217352829821/2452661228"
+		android:layout_gravity="center">
+
+	</com.google.android.gms.ads.AdView>
+
+</RelativeLayout>
+

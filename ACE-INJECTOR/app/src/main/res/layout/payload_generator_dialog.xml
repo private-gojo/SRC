@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:padding="?dialogPreferredPadding"
+	android:fillViewport="true">
+
+	<RelativeLayout
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content">
+
+		<LinearLayout
+			android:id="@+id/payload_generator_dialogLinearLayout"
+			android:layout_width="match_parent"
+			android:layout_height="fill_parent"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Payload"
+					android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+				<RadioGroup
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<RadioButton
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="Normal"
+						android:layout_weight="1.0"
+						android:id="@+id/rNormal"/>
+
+					<RadioButton
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="Split"
+						android:layout_weight="1.0"
+						android:id="@+id/rSplit"/>
+
+					<RadioButton
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="Direct"
+						android:layout_weight="1.0"
+						android:id="@+id/rDirect"/>
+
+				</RadioGroup>
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<CheckBox
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
+						android:layout_weight="1.0"
+						android:text="Rotate"
+						android:id="@+id/cbRotate"/>
+
+					<Spinner
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0"	
+						android:id="@+id/split_spin"/>
+
+				</LinearLayout>
+
+				<android.support.design.widget.TextInputLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:id="@+id/editTextHint">
+
+					<android.support.design.widget.TextInputEditText
+						android:layout_width="match_parent"
+						android:inputType="textMultiLine"
+						android:layout_height="wrap_content"
+						android:ems="10"
+						android:hint="URL/Host"
+						android:id="@+id/host"/>
+
+				</android.support.design.widget.TextInputLayout>
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<LinearLayout
+						android:orientation="vertical"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Request Method"
+							android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+						<Spinner
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:id="@+id/request_spin"/>
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:orientation="vertical"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Injection Method"
+							android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+						<Spinner
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:id="@+id/inject_spin"/>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Query Method"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:layout_marginTop="10dp"/>
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<CheckBox
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="Front Query"
+						android:layout_weight="1.0"
+						android:id="@+id/cbFront"/>
+
+					<CheckBox
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="Back Query"
+						android:layout_weight="1.0"
+						android:id="@+id/cbBack"/>
+
+				</LinearLayout>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Extra Header"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:layout_marginTop="10dp"/>
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<LinearLayout
+						android:orientation="vertical"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0">
+
+						<CheckBox
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:text="Online Host"
+							android:id="@+id/cbOnline"/>
+
+						<CheckBox
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:text="Reverse Proxy"
+							android:id="@+id/cbReverse"
+							android:layout_marginTop="10dp"/>
+
+						<CheckBox
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:text="User Agent"
+							android:id="@+id/cbUser"
+							android:layout_marginTop="10dp"/>
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:orientation="vertical"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0">
+
+						<CheckBox
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:text="Forward Host"
+							android:id="@+id/cbForward"/>
+
+						<CheckBox
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:text="Keep Alive"
+							android:id="@+id/cbKeep"
+							android:layout_marginTop="10dp"/>
+
+						<CheckBox
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:text="Referer"
+							android:id="@+id/cbReferer"
+							android:layout_marginTop="10dp"/>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Extra"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:layout_marginTop="10dp"/>
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<CheckBox
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="Raw"
+						android:layout_weight="1.0"
+						android:id="@+id/cbRaw"/>
+
+					<CheckBox
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="Dual Connect"
+						android:layout_weight="1.0"
+						android:id="@+id/cbDual"/>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</RelativeLayout>
+
+</ScrollView>
+

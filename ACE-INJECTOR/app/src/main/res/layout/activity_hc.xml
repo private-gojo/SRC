@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<include
+		layout="@layout/toolbar_main"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
+
+	<LinearLayout
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:orientation="vertical"
+		android:id="@+id/mainV"
+		android:fitsSystemWindows="true"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:layout_margin="10dp">
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center">
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1.0">
+
+				<RelativeLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/h6"
+					android:layout_marginTop="6dp">
+
+					<EditText
+						android:id="@+id/editTextUrl"
+						android:layout_height="wrap_content"
+						android:layout_width="match_parent"
+						android:hint="URL (eg:www.facebook.com)"
+						android:maxLines="4"
+						android:background="#00000000"
+						android:inputType="textMultiLine|textUri"
+						android:layout_margin="10dp"/>
+
+				</RelativeLayout>
+
+				<TextView
+					android:id="@+id/Txthost1"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="URL (eg:www.facebook.com)"
+					android:fontFamily="sans-serif-smallcaps"
+					android:textColor="?colorPrimary"
+					android:background="#FFFFFF"
+					android:layout_marginLeft="10dp"
+					android:textStyle="bold"/>
+
+			</RelativeLayout>
+
+			<Spinner
+				android:entries="@array/request"
+				android:id="@+id/spinnerRequestMethod"
+				android:layout_width="95dp"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center"
+			android:layout_marginTop="10dp"
+			android:layout_marginBottom="5dp">
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1.0">
+
+				<RelativeLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/h6"
+					android:layout_marginTop="6dp">
+
+					<EditText
+						android:id="@+id/editTextProxy"
+						android:layout_height="wrap_content"
+						android:layout_width="match_parent"
+						android:hint="Proxy (ip:port)"
+						android:maxLines="4"
+						android:background="#00000000"
+						android:inputType="textUri"
+						android:layout_margin="10dp"/>
+
+				</RelativeLayout>
+
+				<TextView
+					android:id="@+id/Txthost2"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Proxy (ip:port)"
+					android:fontFamily="sans-serif-smallcaps"
+					android:textColor="?colorPrimary"
+					android:background="#FFFFFF"
+					android:layout_marginLeft="10dp"
+					android:textStyle="bold"/>
+
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:background="@drawable/h7"
+				android:layout_marginLeft="10dp">
+
+				<Button
+					android:id="@+id/buttonSearch"
+					android:layout_height="40dp"
+					android:text="Check"
+					android:onClick="buttonSearch"
+					android:layout_width="wrap_content"
+					android:background="#00000000"
+					style="@style/Widget.AppCompat.Button.Colored"
+					android:typeface="serif"
+					android:textStyle="bold"
+					android:textColor="#FFFFFF"/>
+
+			</RelativeLayout>
+
+		</LinearLayout>
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<CheckBox
+				android:id="@+id/checkBoxDirectRequest"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Direct Request"
+				android:textColor="?colorPrimary"
+				android:typeface="serif"
+				android:textStyle="bold"/>
+
+		</RelativeLayout>
+
+		<ListView
+			android:id="@+id/listLogs"
+			android:clickable="false"
+			android:longClickable="false"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:transcriptMode="alwaysScroll"
+			android:choiceMode="none"
+			android:layout_below="@+id/inputLayoutSetting"/>
+
+		<TextView
+			android:id="@+id/dt"
+			android:textColor="?colorPrimary"
+			android:visibility="gone"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Text"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

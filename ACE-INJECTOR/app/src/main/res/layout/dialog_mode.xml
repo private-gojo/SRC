@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<android.support.v7.widget.Toolbar
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:id="@+id/toolbar_main"
+		android:theme="@style/ToolbarTheme"
+		android:background="?attr/colorPrimary"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="?attr/actionBarSize"
+		app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical">
+
+		<android.support.v7.widget.CardView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			app:cardCornerRadius="2.0dip"
+			app:cardElevation="2.0dip"
+			app:contentPadding="10dip"
+			android:id="@+id/tunnel"
+			android:layout_marginLeft="8dp"
+			android:layout_marginRight="8dp"
+			android:layout_marginTop="10dp"
+			android:background="#FF396FFF">
+
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<LinearLayout
+					android:orientation="vertical"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="5dp">
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Tunnel Type:"
+						android:textAppearance="?android:attr/textAppearanceSmall"
+						android:textStyle="bold"/>
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textAppearance="?android:attr/textAppearanceSmall"
+						android:layout_marginTop="4dp"
+						android:typeface="monospace"
+						android:id="@+id/tunneltypeTextView1"
+						android:textStyle="bold"/>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+		<android.support.v7.widget.CardView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			app:cardCornerRadius="2.0dip"
+			app:cardElevation="2.0dip"
+			app:contentPadding="10dip"
+			android:id="@+id/tunnel"
+			android:layout_marginLeft="8dp"
+			android:layout_marginRight="8dp"
+			android:layout_marginTop="10dp">
+
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="5dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Tunnel Type:"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:textStyle="bold"/>
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dp">
+
+					<RadioButton
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0"
+						android:text="SSH DIRECT"
+						android:id="@+id/btnDirect"/>
+
+					<RadioButton
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0"
+						android:text="TLS/SSL (stunnel)"
+						android:id="@+id/btnSSL"/>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<RadioButton
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="HTTP PROXY"
+						android:id="@+id/btnHTTP"
+						android:layout_weight="1.0"/>
+
+					<RadioButton
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0"
+						android:text="SSL + PAYLOAD"
+						android:id="@+id/btnSslPayload"/>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<RadioButton
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0"
+						android:text="SLOW DNS"
+						android:id="@+id/btnSlowDNS"/>
+
+					<RadioButton
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0"
+						android:text="SSL/TLS PROXY"
+						android:id="@+id/btnSslrp"/>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+		<android.support.v7.widget.CardView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			app:cardCornerRadius="2.0dip"
+			app:cardElevation="2.0dip"
+			app:contentPadding="10dip"
+			android:id="@+id/tunnel"
+			android:layout_marginLeft="8dp"
+			android:layout_marginRight="8dp"
+			android:layout_marginTop="10dp">
+
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="5dp">
+
+				<LinearLayout
+					android:orientation="vertical"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Misc."
+						android:textAppearance="?android:attr/textAppearanceSmall"
+						android:textStyle="bold"/>
+
+					<LinearLayout
+						android:orientation="vertical"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp">
+
+						<CheckBox
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Custom Payload"
+							android:id="@+id/customPayload"/>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+		<View
+			android:layout_width="1dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0"/>
+
+		<Button
+			android:typeface="monospace"
+			android:id="@+id/saveButton"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:layout_margin="10dp"
+			android:text="@string/save"
+			android:foreground="?android:attr/selectableItemBackground"
+			android:textColor="#FFFFFFFF"
+			android:background="@drawable/button_blue"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

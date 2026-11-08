@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:id="@+id/activity_mainLinearLayout"
+		android:focusable="true"
+		android:focusableInTouchMode="true"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:paddingBottom="80dp"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginTop="10dp">
+
+			<Button
+				android:id="@+id/activity_starterButtonMain"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@drawable/button_blue"
+				android:textColor="#FFFFFF"
+				android:textStyle="bold"
+				android:text="@string/start"
+				android:layout_gravity="center"/>
+
+		</LinearLayout>
+
+		<android.support.v7.widget.CardView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			app:cardCornerRadius="2.0dip"
+			app:cardElevation="2.0dip"
+			android:foreground="?android:attr/selectableItemBackground"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:onClick="tunnelz">
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="40dp"
+				android:layout_margin="10dp"
+				android:gravity="center">
+
+				<ImageButton
+					android:layout_width="25dp"
+					android:layout_height="25dp"
+					android:background="#00000000"
+					android:tint="?colorAccent"
+					android:src="@drawable/ic_settings_transfer"/>
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="SSH DIRECT"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:layout_weight="1.0"
+					android:textSize="15sp"
+					android:layout_marginLeft="5dp"
+					android:id="@+id/activitymainTextView1"/>
+
+				<ImageButton
+					android:layout_width="25dp"
+					android:layout_height="25dp"
+					android:background="#00000000"
+					android:tint="?colorAccent"
+					android:src="@drawable/baseline_keyboard_arrow_right_black_24"/>
+
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:id="@+id/view_all_layout"
+			android:orientation="vertical">
+
+			<android.support.v7.widget.CardView
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				app:cardCornerRadius="2.0dip"
+				app:cardElevation="2.0dip"
+				android:id="@+id/activity_mainInputPayloadLinearLayout"
+				android:layout_marginTop="5dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp">
+
+				<LinearLayout
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:id="@+id/payload_menu"
+						android:layout_height="wrap_content"
+						android:padding="10dp"
+						android:layout_width="wrap_content"
+						android:orientation="vertical">
+
+						<android.support.design.widget.TextInputLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content">
+
+							<android.support.design.widget.TextInputEditText
+								android:id="@+id/activity_mainInputPayloadEditText"
+								android:inputType="textMultiLine|textLongMessage"
+								android:layout_width="fill_parent"
+								android:layout_height="wrap_content"
+								android:maxLines="6"
+								android:ems="20"
+								android:singleLine="true"
+								android:maxLength="3000"
+								android:textColor="@color/colorText"
+								android:hint="@string/payload"/>
+
+						</android.support.design.widget.TextInputLayout>
+
+					</LinearLayout>
+
+					<RelativeLayout
+						android:padding="10dp"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+
+						<LinearLayout
+							android:foreground="?android:attr/selectableItemBackground"
+							android:id="@+id/activity_mainInputProxyLayout"
+							android:layout_height="wrap_content"
+							android:layout_width="match_parent"
+							android:orientation="horizontal"
+							android:visibility="visible"
+							android:gravity="center_horizontal">
+
+							<LinearLayout
+								android:layout_height="wrap_content"
+								android:layout_width="wrap_content"
+								android:orientation="vertical"
+								android:paddingRight="5dp"
+								android:paddingLeft="5dp"
+								android:layout_gravity="start"
+								android:paddingBottom="3dp"
+								android:paddingTop="3dp">
+
+								<TextView
+									android:layout_height="wrap_content"
+									android:layout_width="wrap_content"
+									android:text="@string/proxy_remote"
+									android:textStyle="bold"/>
+
+								<TextView
+									android:id="@+id/activity_mainProxyText"
+									android:layout_height="wrap_content"
+									android:layout_width="wrap_content"
+									android:text="@string/no_value"/>
+
+							</LinearLayout>
+
+							<LinearLayout
+								android:layout_height="match_parent"
+								android:layout_width="fill_parent"
+								android:orientation="vertical"
+								android:layout_gravity="right">
+
+								<ImageView
+									app:tint="?colorPrimary"
+									android:layout_height="match_parent"
+									android:layout_width="30dp"
+									android:layout_marginRight="5dp"
+									android:src="@drawable/ic_mode_edit_black_48dp"
+									android:layout_gravity="end"/>
+
+							</LinearLayout>
+
+						</LinearLayout>
+
+					</RelativeLayout>
+
+					<RelativeLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:paddingLeft="10dp"
+						android:paddingRight="10dp"
+						android:paddingBottom="10dp">
+
+						<LinearLayout
+							android:id="@+id/ViewGone"
+							android:layout_width="fill_parent"
+							android:layout_height="wrap_content"
+							android:visibility="gone">
+
+							<LinearLayout
+								android:foreground="?android:attr/selectableItemBackground"
+								android:clickable="true"
+								android:id="@+id/cmods_snilayout"
+								android:layout_height="wrap_content"
+								android:layout_width="match_parent"
+								android:orientation="horizontal"
+								android:gravity="center_horizontal"
+								android:visibility="gone">
+
+								<LinearLayout
+									android:layout_height="wrap_content"
+									android:layout_width="wrap_content"
+									android:orientation="vertical"
+									android:paddingRight="5dp"
+									android:paddingLeft="5dp"
+									android:layout_gravity="start"
+									android:paddingBottom="3dp"
+									android:paddingTop="3dp">
+
+									<TextView
+										android:textStyle="bold"
+										android:layout_height="wrap_content"
+										android:layout_width="wrap_content"
+										android:text="Custom SNI"/>
+
+									<TextView
+										android:id="@+id/cmods_snitext"
+										android:layout_height="wrap_content"
+										android:layout_width="wrap_content"
+										android:text="@string/no_value"/>
+
+								</LinearLayout>
+
+								<LinearLayout
+									android:layout_height="match_parent"
+									android:layout_width="fill_parent"
+									android:orientation="vertical"
+									android:layout_gravity="right">
+
+									<ImageView
+										app:tint="?colorPrimary"
+										android:layout_height="match_parent"
+										android:layout_width="30dp"
+										android:src="@drawable/ic_mode_edit_black_48dp"
+										android:layout_gravity="end"
+										android:layout_marginRight="5dp"/>
+
+								</LinearLayout>
+
+							</LinearLayout>
+
+						</LinearLayout>
+
+					</RelativeLayout>
+
+				</LinearLayout>
+
+			</android.support.v7.widget.CardView>
+
+		</LinearLayout>
+
+		<android.support.v7.widget.CardView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			app:cardCornerRadius="2.0dip"
+			app:cardElevation="2.0dip"
+			android:foreground="?android:attr/selectableItemBackground"
+			android:clickable="true"
+			android:id="@+id/dialogz_cardView"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginTop="5dp"
+			android:onClick="hype">
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="7dp">
+
+				<ImageView
+					android:src="@drawable/et"
+					android:layout_width="30dp"
+					android:layout_height="26dp"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Join Facebook Group"
+					android:layout_gravity="center_vertical"
+					android:layout_marginLeft="10dp"/>
+
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="5dp"
+			android:layout_marginTop="2dp"
+			android:gravity="left">
+
+			<CheckBox
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/useDns"
+				android:buttonTint="@color/white"
+				android:text="DNS (Google DNS)"/>
+
+			<CheckBox
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/startSSHCheckbox"
+				android:buttonTint="@color/white"
+				android:text="Start SSH"
+				android:layout_marginLeft="5dp"/>
+
+		</LinearLayout>
+
+		<android.support.v7.widget.CardView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			app:cardCornerRadius="2.0dip"
+			app:cardElevation="2.0dip"
+			android:id="@+id/activity_mainMetodoConexaoLayout"
+			android:layout_marginTop="7dp"
+			android:layout_marginLeft="10dp"
+			android:padding="5dp"
+			android:layout_marginRight="10dp"
+			android:visibility="gone">
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:orientation="vertical"
+				android:gravity="center">
+
+				<TextView
+					android:id="@+id/activity_mainMetodoConexaoText"
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:text="@string/method_connection"
+					android:textStyle="bold"/>
+
+				<RadioGroup
+					android:id="@+id/activity_mainMetodoConexaoRadio"
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:orientation="horizontal"
+					android:breakStrategy="balanced"
+					android:gravity="center">
+
+					<android.support.v7.widget.AppCompatRadioButton
+						android:id="@+id/activity_mainSSHDirectRadioButton"
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:textSize="12sp"
+						android:hint="Direct"
+						android:padding="2dp"/>
+
+					<android.support.v7.widget.AppCompatRadioButton
+						android:id="@+id/activity_mainSSHProxyRadioButton"
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:padding="2dp"
+						android:textSize="12sp"
+						android:hint="SSH/Proxy"/>
+
+					<android.support.v7.widget.AppCompatRadioButton
+						android:id="@+id/activity_mainSSLProxyRadioButton"
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:hint="SSL/TLS"
+						android:textSize="12sp"
+						android:padding="2dp"/>
+
+					<android.support.v7.widget.AppCompatRadioButton
+						android:id="@+id/activity_mainSSLPayloadRadioButton"
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:padding="2dp"
+						android:textSize="12sp"
+						android:hint="SSL/Payload"/>
+
+				</RadioGroup>
+
+				<LinearLayout
+					android:layout_height="wrap_content"
+					android:layout_width="fill_parent"
+					android:orientation="vertical"
+					android:layout_gravity="left">
+
+					<CheckBox
+						android:id="@+id/activity_mainCustomPayloadSwitch"
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:hint="Custom Payload"/>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+		<com.google.android.gms.ads.AdView
+			xmlns:ads="http://schemas.android.com/apk/res-auto"
+			android:id="@+id/adBannerMainView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerHorizontal="true"
+			android:layout_alignParentBottom="true"
+			android:layout_marginTop="10dp"
+			ads:adSize="BANNER"
+			ads:adUnitId="ca-app-pub-4327217352829821/2452661228"
+			android:layout_gravity="center">
+
+		</com.google.android.gms.ads.AdView>
+
+		<android.support.v7.widget.CardView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			app:cardCornerRadius="2.0dip"
+			app:cardElevation="2.0dip"
+			android:id="@+id/activity_mainMensagemConfigLinearLayout"
+			android:layout_marginTop="6dp"
+			android:layout_marginLeft="10dp"
+			android:visibility="gone"
+			android:layout_marginRight="10dp">
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="fill_parent"
+				android:padding="10dp"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/activity_mainMensagemConfigTextView"
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:autoLink="web"/>
+
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+	</LinearLayout>
+
+</ScrollView>
+
