@@ -35,7 +35,7 @@ import app.one.secondvpnlite.drawer.DrawerLog
 import app.one.secondvpnlite.service.TunnelManager
 import app.one.secondvpnlite.tunnel.TunnelUtils
 
-open class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener,
+open open class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener,
     View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private var mTunnelThread: Thread? = null
