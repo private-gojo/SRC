@@ -470,63 +470,9 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
      */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            // savePreferences();
-            if (modo_http.isChecked()) {
-                app_prefs.edit().putString("CONNECTION_MODE", "MODO_HTTP").apply();
-
-                payload_after_tls.setEnabled(false);
-                direct_mode.setEnabled(true);
-                payload_after_tls.setVisibility(View.GONE);
-                custom_sni_layout.setVisibility(View.GONE);
-                payload_layout.setVisibility(View.VISIBLE);
-                direct_mode.setVisibility(View.VISIBLE);
-
-                if (direct_mode.isChecked()) {
-                    if (!SecondVPN.getIsCustomFileIsLocked()){
-                        //app_prefs.edit().putBoolean("PAYLOAD_AFTER_TLS", false).apply();
-                        app_prefs.edit().putBoolean("IS_HTTP_DIRECT", true).apply();
-                    }
-                    servidor_proxy_layout.setVisibility(View.GONE);
-                } else {
-                    if (!SecondVPN.getIsCustomFileIsLocked()){
-                       //app_prefs.edit().putBoolean("PAYLOAD_AFTER_TLS", true).apply();
-                       app_prefs.edit().putBoolean("IS_HTTP_DIRECT", false).apply();
-                    }
-                    servidor_proxy_layout.setVisibility(View.VISIBLE);
-                }
-
-            }
-            if (modo_https.isChecked()){
-                app_prefs.edit().putString("CONNECTION_MODE", "MODO_HTTPS").apply();
-                payload_after_tls.setEnabled(true);
-                direct_mode.setEnabled(false);
-                payload_after_tls.setVisibility(View.VISIBLE);
-                custom_sni_layout.setVisibility(View.VISIBLE);
-                direct_mode.setVisibility(View.GONE);
-
-                if (payload_after_tls.isChecked()) {
-                    if (!SecondVPN.getIsCustomFileIsLocked()){
-                       //app_prefs.edit().putBoolean("IS_HTTP_DIRECT", false).apply();
-                        app_prefs.edit().putBoolean("PAYLOAD_AFTER_TLS", true).apply();
-                    }
-                    payload_layout.setVisibility(View.VISIBLE);
-                    servidor_proxy_layout.setVisibility(View.GONE);
-                } else {
-                    if (!SecondVPN.getIsCustomFileIsLocked()){
-                       // app_prefs.edit().putBoolean("IS_HTTP_DIRECT", false).apply();
-                        app_prefs.edit().putBoolean("PAYLOAD_AFTER_TLS", false).apply();
-                    }
-                    payload_layout.setVisibility(View.GONE);
-                    servidor_proxy_layout.setVisibility(View.GONE);
-                }
-            }
-
-        if (!intentToImport){
-           savePreferences();
-        }
-
-
+        RelayMainEvents.onCheckedChanged(this, intentToImport, this::savePreferences);
     }
+
     @Override
     protected void onPause()
     {
