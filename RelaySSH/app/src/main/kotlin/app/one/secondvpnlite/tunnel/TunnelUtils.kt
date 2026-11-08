@@ -1,6 +1,6 @@
 package app.one.secondvpnlite.tunnel
 
-import android.net.ArrayMap
+import android.util.ArrayMap
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities

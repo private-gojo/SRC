@@ -10,7 +10,6 @@ import androidx.annotation.NonNull
 import app.one.secondvpnlite.BuildConfig
 import java.math.BigInteger
 import java.net.Inet6Address
-import java.util.Collection
 import java.util.Locale
 import java.util.PriorityQueue
 import java.util.TreeSet

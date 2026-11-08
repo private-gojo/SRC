@@ -21,7 +21,6 @@ import java.net.SocketException
 import java.net.SocketTimeoutException
 import java.util.ArrayList
 import java.util.Arrays
-import java.util.Collection
 import java.util.Collections
 import java.util.HashMap
 import java.util.regex.Pattern
@@ -196,7 +195,7 @@ object VpnUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val connectivityManager =
                 context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val dnsList: String
+            var dnsList: String
             try {
                 dnsList = connectivityManager
                     .getLinkProperties(connectivityManager.activeNetwork)!!

@@ -105,7 +105,7 @@ class HttpProxyCustom private constructor(
         var length = ClientServerHello.readLineRN(input, buffer)
 
         val responseFirstLine = try {
-            String(buffer, 0, length, "ISO-8859-1")
+            String(buffer, 0, length, Charset.forName("ISO-8859-1"))
         } catch (_: UnsupportedEncodingException) {
             String(buffer, 0, length)
         }
