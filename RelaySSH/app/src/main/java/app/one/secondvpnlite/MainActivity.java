@@ -250,155 +250,16 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
 
 
 
-    private boolean checkConfig(boolean istoSave){
-        configIsOk = true;
-        //VERIFICA A REDE
-        if (!TunnelUtils.isNetworkOnline(this)) {
-            if (!istoSave){
-                Toast.makeText(this, this.getString(R.string.no_network), Toast.LENGTH_SHORT).show();
-                configIsOk = false;
-            }
-
-        }
-        //USUARIO E SENHA VALIDAÇÃO
-        if (!istoSave){
-            exportWithoutLogin = true;
-            try{
-                String[] ipSplit = SecondVPN.getUsuarioAndPass().split("@");
-                String user=  ipSplit[0];
-                String passwd =  ipSplit[1];
-
-                if (user.isEmpty()){
-                    configIsOk = false;
-                }
-                if (passwd.isEmpty()){
-                    configIsOk = false;
-                }
-
-            } catch (Exception e) {
-                configIsOk = false;
-                e.printStackTrace();
-            }
-        }else{
-            exportWithoutLogin = false;
-        }
-
-        //SERVIDOR SSH VALIDAÇÃO
-        try{
-            String[] ipSplit = SecondVPN.getServidorSSHDomain().split(":");
-            String servidor =  ipSplit[0];
-            int porta = Integer.parseInt(ipSplit[1]);
-
-            if (servidor.isEmpty()){
-                configIsOk = false;
-            }
-            if (porta == 0){
-                configIsOk = false;
-            }
-        } catch (Exception e) {
-            configIsOk = false;
-            e.printStackTrace();
-        }
-
-        if (SecondVPN.getConnectionMode().equals("MODO_HTTP")) {
-            if (direct_mode.isChecked()) {
-                if (SecondVPN.getServidorSSHDomain().isEmpty()){
-                    configIsOk = false;
-                }
-                if (SecondVPN.getPayloadKey().isEmpty()){
-                    configIsOk = false;
-                }
-
-            }else{
-                try{
-                    String[] ipSplit = SecondVPN.getProxyIPDomain().split(":");
-                    String servidor =  ipSplit[0];
-                    int porta = Integer.parseInt(ipSplit[1]);
-
-                    if (servidor.isEmpty()){
-                        configIsOk = false;
-                    }
-                    if (porta == 0){
-                        configIsOk = false;
-                    }
-                } catch (Exception e) {
-                    configIsOk = false;
-                    e.printStackTrace();
-                }
-
-                if (SecondVPN.getServidorSSHDomain().isEmpty()){
-                    configIsOk = false;
-                }
-                if (SecondVPN.getPayloadKey().isEmpty()){
-                    configIsOk = false;
-                }
-                if (SecondVPN.getProxyIPDomain().isEmpty()){
-                    configIsOk = false;
-                }
-            }
-        }
-        if (SecondVPN.getConnectionMode().equals("MODO_HTTPS")) {
-            if (payload_after_tls.isChecked()){
-                if (SecondVPN.getServidorSSHDomain().isEmpty()){
-                    configIsOk = false;
-                }
-                if (SecondVPN.getSNI().isEmpty()){
-                    configIsOk = false;
-                }
-                if (SecondVPN.getPayloadKey().isEmpty()){
-                    configIsOk = false;
-                }
-            }else{
-                if (SecondVPN.getServidorSSHDomain().isEmpty()){
-                    configIsOk = false;
-                }
-                if (SecondVPN.getSNI().isEmpty()){
-                    configIsOk = false;
-                }
-            }
-        }
-
-        if (SecondVPN.getIsCustomFileIsLocked()){
-            if (SecondVPN.getIsCustomFileIsLocked() && SecondVPN.isIsCustomConfigOnlyMobileData()){
-                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                if (wifiManager.isWifiEnabled()) {
-                    configIsOk = false;
-                    if(!istoSave){
-                        Toast.makeText(this, getString(R.string.only_mobile_data_toast), Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-            }
-            if (checkValidade(SecondVPN.data_validade_file())){
-                configIsOk = false;
-                if (!istoSave){
-                    Toast.makeText(this, getString(R.string.file_validate_end), Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        }
-
-
+    private boolean checkConfig(boolean istoSave) {
+        RelayMainValidation.ValidationResult result =
+                RelayMainValidation.validate(this, istoSave);
+        configIsOk = result.getConfigIsOk();
+        exportWithoutLogin = result.getExportWithoutLogin();
         return configIsOk;
     }
 
     public static boolean checkValidade(long validadeDateMillis) {
-        if (validadeDateMillis == 0) {
-            return false;
-        }
-
-        // Get Current Date
-        long date_atual = Calendar.getInstance()
-                .getTime().getTime();
-
-        //COVERTER PRA STRING
-        //AppLogManager.addLog("Data atual: " + date_atual + " Vencimento: " + validadeDateMillis);
-
-        if (date_atual >= validadeDateMillis) {
-            return true;
-        }
-
-        return false;
+        return RelayMainValidation.isExpired(validadeDateMillis);
     }
 
     @Override
