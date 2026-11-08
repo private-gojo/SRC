@@ -13,13 +13,10 @@
 	<string name="log_settings_valid">File valid until: %1$s</string>
 	<string name="log_server_banner">Server Message:</string>
 	<string name="log_conection_lost">Connection lost</string>
-
-	<string name="clear_logs">Logs Cleared</string>
 	
 	<string name="start">Connect</string>
 	<string name="stop">Disconnect</string>
 	<string name="reconnect">Reconnect</string>
-	<string name="clear_logs">Logs Cleared</string>
 	<string name="bugs_fixed">Small bugs fixed</string>
 	<string name="alert_app_on_latest">Your app is at the latest version</string>
 	<string name="alert_update_error">An error occurred while verifying the update. Please contact the developer.\n</string>
