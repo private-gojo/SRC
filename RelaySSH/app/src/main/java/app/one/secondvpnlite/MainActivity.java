@@ -235,17 +235,10 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     }
 
     private void startVPNService() {
-        Intent intent = VpnService.prepare(this);
-
-        if (intent != null) {
-            try {
-                startActivityForResult(intent, START_VPN_PROFILE);
-            } catch (ActivityNotFoundException ane) {
-                Toast.makeText(this, this.getString(R.string.error_request_permission), Toast.LENGTH_LONG).show();
-            }
-        } else {
-            onActivityResult(START_VPN_PROFILE, Activity.RESULT_OK, null);
-        }
+        RelayMainVpnFlow.requestPermission(
+                this,
+                () -> onActivityResult(START_VPN_PROFILE, Activity.RESULT_OK, null)
+        );
     }
 
 
@@ -266,50 +259,20 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == START_VPN_PROFILE) {
-            if (resultCode == Activity.RESULT_OK) {
-                //CHECA CONFIG
-                if (checkConfig(false)){
-                    //SETA ADS
-                    app_prefs.edit().putBoolean("LAST_A",false).apply();
-                    //DESATIVA BOTOES
-                    disableInterfaceOnConnect();
-                    //LIMPA LOGS
-                    AppLogManager.clearLog();
-                    //MOSTRA LOGS
-                    if (SecondVPN.isShowLogs()){
-                        showLog();
-                    }
+        RelayMainVpnFlow.handlePermissionResult(
+                this,
+                requestCode,
+                resultCode,
+                () -> checkConfig(false),
+                () -> showLog(),
+                () -> startTunnelManagerFromFlow()
+        );
+    }
 
-                    //SETA WAKELOCK
-                    if (SecondVPN.isEnableWakeLock()){
-                        try{
-                            wakeLock = ((PowerManager)getSystemService(Context.POWER_SERVICE)).newWakeLock(1, "SecondVPNLite::WakeLock");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    //INICIA VPN
-                    try{
-                        TunnelManager.isToStopService = false;
-                        TunnelManager.stoppedLog = false;
-                        TunnelManager.stoppingLog = false;
-                        TunnelManager.vpnDestroyedLog = false;
-
-                        mTunnelManager = new TunnelManager();
-                        mTunnelThread = new Thread(mTunnelManager);
-                        mTunnelThread.start();
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }else{
-                    Toast.makeText(this, this.getString(R.string.empty_configs), Toast.LENGTH_LONG).show();
-                }
-                }
-            }
+    void startTunnelManagerFromFlow() {
+        mTunnelManager = new TunnelManager();
+        mTunnelThread = new Thread(mTunnelManager);
+        mTunnelThread.start();
     }
 
 
