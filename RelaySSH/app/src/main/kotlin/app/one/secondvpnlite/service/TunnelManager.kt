@@ -171,11 +171,6 @@ class TunnelManager : VpnService(), Runnable, ConnectionMonitor, InteractiveCall
         }
     }
 
-    init {
-        // Keep the original native dependency loaded by the VPN manager.
-        System.loadLibrary("tun2socks")
-    }
-
     private fun setWakelock() {
         try {
             wakeLock!!.acquire()
