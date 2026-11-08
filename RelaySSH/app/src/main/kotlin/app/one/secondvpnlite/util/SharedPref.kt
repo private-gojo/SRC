@@ -16,8 +16,8 @@ class SharedPref private constructor(context: Context) {
         editor.putString(key, value).apply()
     }
 
-    fun getString(key: String, defaultValue: String): String? =
-        sharedPreferences.getString(key, defaultValue)
+    fun getString(key: String, defaultValue: String): String =
+        sharedPreferences.getString(key, defaultValue) ?: defaultValue
 
     fun putInt(key: String, value: Int) {
         editor.putInt(key, value).apply()

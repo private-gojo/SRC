@@ -6,7 +6,7 @@ import com.google.android.gms.ads.initialization.InitializationStatus
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener
 import app.one.secondvpnlite.util.SharedPref
 
-class SecondVPN : Application() {
+open class SecondVPN : Application() {
     override fun onCreate() {
         super.onCreate()
         app_prefs = SharedPref.getInstance(this)
@@ -53,18 +53,18 @@ class SecondVPN : Application() {
         @JvmStatic fun isIsCustomConfigOnlyMobileData(): Boolean =
             prefs().getBoolean("IS_CONFIG_ONLY_MOBILE_DATA", false)
 
-        @JvmStatic fun getUDPResolver(): String? = prefs().getString("UDP_ADDR", "127.0.0.1:7300")
-        @JvmStatic fun customDNS1(): String? = prefs().getString("CUSTOM_DNS_1", "1.1.1.1")
-        @JvmStatic fun customDNS2(): String? = prefs().getString("CUSTOM_DNS_2", "1.0.0.1")
-        @JvmStatic fun getServidorSSHDomain(): String? = prefs().getString("SSH_SERVER_DOMAIN", "")
-        @JvmStatic fun getSNI(): String? = prefs().getString("CUSTOM_SNI", "")
-        @JvmStatic fun getProxyIPDomain(): String? = prefs().getString("PROXY_IP_DOMAIN", "")
-        @JvmStatic fun getTLSVersion(): String? = prefs().getString("TLS_VERSION", "auto")
-        @JvmStatic fun getConnectionMode(): String? = prefs().getString("CONNECTION_MODE", "")
-        @JvmStatic fun getPayloadKey(): String? = prefs().getString("PAYLOAD_KEY", "")
-        @JvmStatic fun getUsuarioAndPass(): String? = prefs().getString("SSH_AUTH_DATA", "")
-        @JvmStatic fun getConfigMsgText(): String? = prefs().getString("CONFIG_MSG", "")
-        @JvmStatic fun getCurrentVpnStatus(): String? =
+        @JvmStatic fun getUDPResolver(): String = prefs().getString("UDP_ADDR", "127.0.0.1:7300")
+        @JvmStatic fun customDNS1(): String = prefs().getString("CUSTOM_DNS_1", "1.1.1.1")
+        @JvmStatic fun customDNS2(): String = prefs().getString("CUSTOM_DNS_2", "1.0.0.1")
+        @JvmStatic fun getServidorSSHDomain(): String = prefs().getString("SSH_SERVER_DOMAIN", "")
+        @JvmStatic fun getSNI(): String = prefs().getString("CUSTOM_SNI", "")
+        @JvmStatic fun getProxyIPDomain(): String = prefs().getString("PROXY_IP_DOMAIN", "")
+        @JvmStatic fun getTLSVersion(): String = prefs().getString("TLS_VERSION", "auto")
+        @JvmStatic fun getConnectionMode(): String = prefs().getString("CONNECTION_MODE", "")
+        @JvmStatic fun getPayloadKey(): String = prefs().getString("PAYLOAD_KEY", "")
+        @JvmStatic fun getUsuarioAndPass(): String = prefs().getString("SSH_AUTH_DATA", "")
+        @JvmStatic fun getConfigMsgText(): String = prefs().getString("CONFIG_MSG", "")
+        @JvmStatic fun getCurrentVpnStatus(): String =
             prefs().getString("LAST_VPN_STATUS", "DESCONECTADO")
 
         @JvmStatic
