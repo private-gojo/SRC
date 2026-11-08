@@ -216,7 +216,6 @@
 	<string name="ssl">SSH → SSL/TLS</string>
 	<string name="slowdns">SSH → SlowDNS</string>
 	<string name="sslpayload">SSL → HTTP PAYLOAD</string>
-	<string name="custom_payload1"> (Custom Payload) </string>
 	<string name="pay_gen">Payload Generator</string>
 	<string name="gen">Generate</string>
 	<string name="custom_payload_msg">Please enable custom payload to generate</string>
