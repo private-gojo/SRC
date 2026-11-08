@@ -115,24 +115,24 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     @SuppressLint("StaticFieldLeak")
     public static TextView config_msg;
     @SuppressLint("StaticFieldLeak")
-    private static LinearLayout servidor_ssh_layout;
+    static LinearLayout servidor_ssh_layout;
     @SuppressLint("StaticFieldLeak")
-    private static LinearLayout servidor_proxy_layout;
+    static LinearLayout servidor_proxy_layout;
     @SuppressLint("StaticFieldLeak")
-    private static LinearLayout custom_sni_layout;
+    static LinearLayout custom_sni_layout;
     @SuppressLint("StaticFieldLeak")
-    private static LinearLayout payload_layout;
+    static LinearLayout payload_layout;
     @SuppressLint("StaticFieldLeak")
-    private static LinearLayout user_and_pass_layout;
+    static LinearLayout user_and_pass_layout;
 
     private boolean configIsOk;
     private boolean exportWithoutLogin = false;
     private boolean intentToImport = false;
 
-    private DrawerLog mDrawer;
-    private Toolbar app_toolbar;
+    DrawerLog mDrawer;
+    Toolbar app_toolbar;
 
-    private static AdView mAdView;
+    static AdView mAdView;
     static InterstitialAd mInterstitialAd;
     public static Context sContext;
     public static Activity sActivity;
@@ -149,122 +149,9 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
 
     }
 
-    private void startApp(){
-        mDrawer = new DrawerLog(this);
-        setContentView(R.layout.activity_main_drawer);
-        app_toolbar = findViewById(R.id.app_toolbar);
-        setSupportActionBar(app_toolbar);
-        //CORRIGE ABRIR TECLADO MSM COM INPUTTEXT DESABILITADO EM ALGUNS TELEFONES
-        app_toolbar.requestFocus();
-
-        sActivity = this;
-        sContext = this;
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        //List<String> testDeviceIds = Arrays.asList("6F24778EBA50C09BF8ABE74236319D29");
-        List<String> testDeviceIds = Arrays.asList("74961B0CF01927ADD5D88020D3CC1F9C", "6F24778EBA50C09BF8ABE74236319D29");
-        RequestConfiguration configuration =
-                new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
-        MobileAds.setRequestConfiguration(configuration);
-
-        //DECLARE ADVIEW
-        mAdView = findViewById(R.id.adView);
-
-        mDrawer.setDrawer(this);
-
-        app_prefs = getSharedPreferences(SecondVPN.PREFS_GERAL, Context.MODE_PRIVATE);
-        start_msg = getSharedPreferences(SecondVPN.FIRST_START, Context.MODE_PRIVATE);
-
-        boolean showFirstTime = start_msg.getBoolean("default_config", true);
-
-       /*PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
-        boolean isIgnoringBatteryOptimizations;*/
-        Intent intent = getIntent();
-        if (showFirstTime  && intent != null && !intent.getBooleanExtra("IS_IMPORT", false)) {
-            SecondVPN.setDefaultPrefs();
-            start_msg.edit().putBoolean("default_config", false).apply();
-            showStartMsg();
-        }else if (showFirstTime  && intent != null && intent.getBooleanExtra("IS_IMPORT", false)){
-            start_msg.edit().putBoolean("default_config", false).apply();
-            showStartMsg();
-        }
-
-
-        servidor_ssh_layout = (LinearLayout) findViewById(R.id.activity_mainInputServerSSHIPORTLayout);
-        servidor_proxy_layout = (LinearLayout) findViewById(R.id.activity_mainInputServerPROXYIPORTLayout);
-        custom_sni_layout = (LinearLayout) findViewById(R.id.activity_mainInputSNILayout);
-        payload_layout = (LinearLayout) findViewById(R.id.activity_mainInputPayloadLinearLayout);
-        user_and_pass_layout = (LinearLayout) findViewById(R.id.activity_mainInputUserandPassLayout);
-        start_button = (Button) findViewById(R.id.activity_StartConnection);
-
-
-        FloatingActionButton logs = findViewById(R.id.logs);
-        logs.setOnClickListener(this);
-        // if (SecondVPN.getCurrentVpnStatus().equals("CONECTADO")){
-        if (TunnelManager.isServiceRunning){
-            disableInterfaceOnConnect();
-            start_button.setText(this.getString(R.string.stop));
-        }else{
-            enableInterfaceOnConnect();
-            start_button.setText(this.getString(R.string.start));
-        }
-
-        user_and_pass= (TextView) findViewById(R.id.activity_mainInputUserandPass);
-        servidor_ssh = (TextView) findViewById(R.id.activity_mainInputServerSSHIPORT);
-        servidor_proxy = (TextView) findViewById(R.id.activity_mainInputServerPROXYIPORT);
-        custom_sni = (TextView) findViewById(R.id.activity_mainInputSNI);
-        custom_payload = (TextView) findViewById(R.id.activity_mainInputPayloadEditText);
-        modo_http = (AppCompatRadioButton) findViewById(R.id.modo_http);
-        modo_https = (AppCompatRadioButton) findViewById(R.id.modo_https);
-        payload_after_tls = (SwitchCompat) findViewById(R.id.activity_mainPayloadAfterTLS);
-        direct_mode = (SwitchCompat) findViewById(R.id.activity_mainDirectMode);
-        config_msg = (TextView) findViewById(R.id.config_msg_textview);
-
-        //SETUP AD
-        setup_ad();
-
-        updateLayoutWithConfig1();
-        updateLayoutWithConfig2();
-        start_button.setOnClickListener(this);
-        modo_https.setOnCheckedChangeListener(this);
-        modo_http.setOnCheckedChangeListener(this);
-        payload_after_tls.setOnCheckedChangeListener(this);
-        direct_mode.setOnCheckedChangeListener(this);
-
-        //Toast.makeText(this,"This is toast",Toast.LENGTH_SHORT).show();
-
-        updateLayoutWithConfig3();
-        //if (SecondVPN.getCurrentVpnStatus().equals("CONECTADO")){
-        if (TunnelManager.isServiceRunning){
-            disableInterfaceOnConnect();
-            start_button.setText(this.getString(R.string.stop));
-        }else{
-            enableInterfaceOnConnect();
-            start_button.setText(this.getString(R.string.start));
-        }
-
-
-        //LOAD AD
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        if (wifiManager.isWifiEnabled()) {
-            if (intent != null && !intent.getBooleanExtra("IS_IMPORT", false)){
-                ladi();
-            }
-        }else if (TunnelManager.isServiceRunning)/*(SecondVPN.getCurrentVpnStatus().equals("CONECTADO"))*/ {
-            if (intent != null && !intent.getBooleanExtra("IS_IMPORT", true)){
-                ladi();
-            }
-        }
-
-        //ccb();
-
+    private void startApp() {
+        RelayMainStartup.start(this);
     }
-
 
     /*private void ccb() {
         if (SecondVPN.getIsCustomFileIsLocked() && !servidor_ssh.getText().toString().contains(getAst())){
@@ -323,22 +210,8 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         RelayMainUi.updateLayoutWithConfig3();
     }
 
-    private void showStartMsg() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this,R.style.AlertDialogTheme)
-        //AlertDialog.Builder dialog = new AlertDialog.Builder(this,AlertDialog.THEME_DEVICE_DEFAULT_DARK)
-                .setTitle(this.getString(R.string.start_msg_title))
-                .setCancelable(true)
-                .setMessage(this.getString(R.string.start_msg_text))
-                .setPositiveButton("OK", (dialog1, which) -> {
-
-                    // TODO: Add positive button action code here
-                    app_prefs.edit().putBoolean("default_config",false).apply();
-                    dialog1.dismiss();
-                    getPermissionAndroid13();
-
-
-                });
-        dialog.show();
+    void showStartMsg() {
+        RelayMainStartup.showStartMessage(this);
     }
 
     public void getPermissionAndroid13() {
