@@ -38,20 +38,20 @@
         <activity
             android:label="@string/title_filter_apps"
             android:exported="true"
-            android:name=".settings.AllowedAppsActivity"/>
+            android:name="app.one.secondvpnlite.settings.AllowedAppsActivity"/>
 
         <activity
             android:label="@string/settings"
             android:exported="true"
-            android:name=".settings.AppSettings"/>
+            android:name="app.one.secondvpnlite.settings.AppSettings"/>
         <activity
             android:label="@string/export_file"
             android:exported="true"
-            android:name=".configs.ExportConfig"/>
+            android:name="app.one.secondvpnlite.configs.ExportConfig"/>
         <activity
             android:label="@string/import_file"
             android:exported="true"
-            android:name=".configs.ImportConfig"
+            android:name="app.one.secondvpnlite.configs.ImportConfig"
             android:grantUriPermissions="true"
             android:parentActivityName=".MainActivity">
         <intent-filter>
@@ -127,7 +127,7 @@
             android:enabled="true"
             android:permission="android.permission.BIND_VPN_SERVICE"
             android:foregroundServiceType="dataSync"
-            android:name=".service.TunnelManager">
+            android:name="app.one.secondvpnlite.service.TunnelManager">
             <intent-filter>
                 <action android:name="android.net.VpnService"/>
             </intent-filter>
@@ -137,7 +137,7 @@
         <service
             android:stopWithTask="false"
             android:label="Relay SSH - Notification"
-            android:name=".notification.NotificationService"
+            android:name="app.one.secondvpnlite.notification.NotificationService"
             android:foregroundServiceType="dataSync"
             android:exported="false"
             android:enabled="true">
@@ -148,7 +148,7 @@
             android:permission="TODO"
             android:process=":TetheringServer"
             android:label="Relay SSH - Tethering"
-            android:name=".tethering.TetheringServer"
+            android:name="app.one.secondvpnlite.tethering.TetheringServer"
             android:foregroundServiceType="dataSync"
             android:stopWithTask="false"
             android:exported="true"
