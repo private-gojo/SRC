@@ -352,15 +352,6 @@ class TunnelManager : VpnService(), Runnable, ConnectionMonitor, InteractiveCall
         }
     }
 
-    @JvmStatic
-    fun resolveHostDomain(hostIP: String): String {
-        return try {
-            InetAddress.getByName(hostIP).hostAddress ?: hostIP
-        } catch (_: Exception) {
-            hostIP
-        }
-    }
-
     @Throws(Exception::class)
     fun startSSH() {
         if (SecondVPN.isEnableNotification()) {
@@ -1607,6 +1598,15 @@ class TunnelManager : VpnService(), Runnable, ConnectionMonitor, InteractiveCall
     }
 
     companion object {
+        @JvmStatic
+        fun resolveHostDomain(hostIP: String): String {
+            return try {
+                InetAddress.getByName(hostIP).hostAddress ?: hostIP
+            } catch (_: Exception) {
+                hostIP
+            }
+        }
+
         private const val AUTH_PUBLICKEY = "publickey"
         private const val AUTH_PASSWORD = "password"
         private const val AUTH_KEYBOARDINTERACTIVE = "keyboard-interactive"
