@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     private Toolbar app_toolbar;
 
     private static AdView mAdView;
-    private static InterstitialAd mInterstitialAd;
+    static InterstitialAd mInterstitialAd;
     public static Context sContext;
     public static Activity sActivity;
     public static PowerManager.WakeLock wakeLock;
@@ -284,114 +284,15 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     }
 
     private boolean duringisLoad = false;
-    private static void setup_ad(){
-        //ADMOB KEYS
-        AdView adView = new AdView(sContext);
-
-        adView.setAdSize(AdSize.BANNER);
-        String ab = "ca-app";
-        if (BuildConfig.DEBUG){
-            ab = "ca-app-pub-3940256099942544/6300978111";
-        }else{
-            ab = "ca-app-pub-2955918284006466/5236078879";
-        }
-        adView.setAdUnitId(ab);
-        // TODO: Add adView to your view hierarchy.
-
-        //ADREQUEST E CARREGA BANNER
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-
-        String ai = "ca-app";
-        if (BuildConfig.DEBUG){
-            ai = "ca-app-pub-3940256099942544/1033173712";
-        }else{
-            ai = "ca-app-pub-2955918284006466/2356432963";
-        }
-
-        //CARREGA INTERSTITIAL AD
-        InterstitialAd.load(sContext,ai, adRequest,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        mInterstitialAd = interstitialAd;
-                        Log.i(TAG, "onAdLoaded");
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.i(TAG, loadAdError.getMessage());
-                        mInterstitialAd = null;
-
-                    }
-                });
+    private static void setup_ad() {
+        RelayMainAds.setup(sContext, mAdView);
     }
 
     static int delay = 4000;
     static boolean isShowing = false;
-    public static void ladi(){
-        if (!SecondVPN.getLastA()){
-            if (!isShowing){
-                sActivity.runOnUiThread(new Runnable() {
-                    public void run() {
-                        if (mInterstitialAd == null){
-                            delay = 6000; //ver o tempo bom pra esse delay
-                            setup_ad();
-                        }
-                        try{
-                           // ProgressDialog pd = new ProgressDialog(sActivity);
-                           // pd.setMessage(sContext.getString(R.string.please_wait_trying));
-                           // pd.setCancelable(false);
-                           // pd.show();
-                            isShowing = true;
 
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (mInterstitialAd != null) {
-                                        mInterstitialAd.show(sActivity);
-                                        app_prefs.edit().putBoolean("LAST_A",true).apply();
-                                        isShowing = false;
-                                        /*try{
-                                            if (pd.isShowing()){
-                                                pd.dismiss();
-                                                isShowing = false;
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }*/
-
-
-                                    } else {
-                                        isShowing = false;
-                                        /*try{
-                                            if (pd.isShowing()){
-                                                pd.dismiss();
-                                                isShowing = false;
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }*/
-                                        Log.d("TAG", "The interstitial ad wasn't ready yet.");
-                                    };
-                                }
-                            }, delay);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-
-
-
-                    }
-                });
-            }
-        }
-
+    public static void ladi() {
+        RelayMainAds.loadInterstitialIfNeeded(sActivity, sContext, app_prefs, mAdView);
     }
 
     private void clear_textviews(){
