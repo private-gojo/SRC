@@ -28,7 +28,8 @@ class HttpProxyCustom private constructor(
     private val proxyPass: String?,
     private val requestPayload: String?,
     private val modoDropbear: Boolean,
-    private val mContext: Context
+    private val mContext: Context,
+    @Suppress("UNUSED_PARAMETER") marker: Unit
 ) : ProxyData {
 
     private var sock: Socket? = null
@@ -48,7 +49,8 @@ class HttpProxyCustom private constructor(
         proxyPass,
         null,
         false,
-        context
+        context,
+        Unit
     )
 
     constructor(
@@ -68,7 +70,8 @@ class HttpProxyCustom private constructor(
         proxyPass,
         requestPayload,
         modoDropbear,
-        context
+        context,
+        Unit
     )
 
     @Throws(IOException::class)
