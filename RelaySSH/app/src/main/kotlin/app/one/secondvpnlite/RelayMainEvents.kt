@@ -14,10 +14,10 @@ object RelayMainEvents {
         intentToImport: Boolean,
         savePreferences: Runnable
     ) {
-        val httpMode = MainActivity.modo_http
-        val httpsMode = MainActivity.modo_https
-        val payloadAfterTls = MainActivity.payload_after_tls
-        val directMode = MainActivity.direct_mode
+        val httpMode = MainActivity.modo_http!!
+        val httpsMode = MainActivity.modo_https!!
+        val payloadAfterTls = MainActivity.payload_after_tls!!
+        val directMode = MainActivity.direct_mode!!
 
         val customSniLayout = activity.findViewById<LinearLayout>(
             R.id.activity_mainInputSNILayout
@@ -31,7 +31,7 @@ object RelayMainEvents {
 
         // Preserve the original HTTP mode behavior.
         if (httpMode.isChecked) {
-            MainActivity.app_prefs.edit()
+            MainActivity.app_prefs!!.edit()
                 .putString("CONNECTION_MODE", "MODO_HTTP")
                 .apply()
 
@@ -44,14 +44,14 @@ object RelayMainEvents {
 
             if (directMode.isChecked) {
                 if (!SecondVPN.getIsCustomFileIsLocked()) {
-                    MainActivity.app_prefs.edit()
+                    MainActivity.app_prefs!!.edit()
                         .putBoolean("IS_HTTP_DIRECT", true)
                         .apply()
                 }
                 proxyLayout.visibility = View.GONE
             } else {
                 if (!SecondVPN.getIsCustomFileIsLocked()) {
-                    MainActivity.app_prefs.edit()
+                    MainActivity.app_prefs!!.edit()
                         .putBoolean("IS_HTTP_DIRECT", false)
                         .apply()
                 }
@@ -61,7 +61,7 @@ object RelayMainEvents {
 
         // Preserve the original HTTPS mode behavior.
         if (httpsMode.isChecked) {
-            MainActivity.app_prefs.edit()
+            MainActivity.app_prefs!!.edit()
                 .putString("CONNECTION_MODE", "MODO_HTTPS")
                 .apply()
 
@@ -73,7 +73,7 @@ object RelayMainEvents {
 
             if (payloadAfterTls.isChecked) {
                 if (!SecondVPN.getIsCustomFileIsLocked()) {
-                    MainActivity.app_prefs.edit()
+                    MainActivity.app_prefs!!.edit()
                         .putBoolean("PAYLOAD_AFTER_TLS", true)
                         .apply()
                 }
@@ -81,7 +81,7 @@ object RelayMainEvents {
                 proxyLayout.visibility = View.GONE
             } else {
                 if (!SecondVPN.getIsCustomFileIsLocked()) {
-                    MainActivity.app_prefs.edit()
+                    MainActivity.app_prefs!!.edit()
                         .putBoolean("PAYLOAD_AFTER_TLS", false)
                         .apply()
                 }

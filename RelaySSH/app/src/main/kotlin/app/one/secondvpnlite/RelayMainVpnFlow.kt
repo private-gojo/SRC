@@ -55,7 +55,7 @@ object RelayMainVpnFlow {
 
         if (validateConfig.call()) {
             // Preserve the original connection startup sequence.
-            MainActivity.app_prefs.edit().putBoolean("LAST_A", false).apply()
+            MainActivity.app_prefs!!.edit().putBoolean("LAST_A", false).apply()
             MainActivity.disableInterfaceOnConnect()
             AppLogManager.clearLog()
 
@@ -65,7 +65,7 @@ object RelayMainVpnFlow {
 
             if (SecondVPN.isEnableWakeLock()) {
                 try {
-                    MainActivity.wakeLock = (
+                    MainActivity.wakeLock!! = (
                         activity.getSystemService(Context.POWER_SERVICE) as PowerManager
                     ).newWakeLock(1, "SecondVPNLite::WakeLock")
                 } catch (error: Exception) {
@@ -110,7 +110,7 @@ object RelayMainVpnFlow {
         startVpn: Runnable,
         stopVpn: Runnable
     ) {
-        if (!MainActivity.start_button.text.toString()
+        if (!MainActivity.start_button!!.text.toString()
                 .equals(activity.getString(R.string.stop))
         ) {
             savePreferences.run()

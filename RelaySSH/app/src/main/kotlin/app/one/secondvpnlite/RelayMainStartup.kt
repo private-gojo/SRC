@@ -63,14 +63,14 @@ object RelayMainStartup {
             Context.MODE_PRIVATE
         )
 
-        val showFirstTime = MainActivity.start_msg.getBoolean("default_config", true)
+        val showFirstTime = MainActivity.start_msg!!.getBoolean("default_config", true)
         val intent = activity.intent
         if (showFirstTime && intent != null && !intent.getBooleanExtra("IS_IMPORT", false)) {
             SecondVPN.setDefaultPrefs()
-            MainActivity.start_msg.edit().putBoolean("default_config", false).apply()
+            MainActivity.start_msg!!.edit().putBoolean("default_config", false).apply()
             activity.showStartMsg()
         } else if (showFirstTime && intent != null && intent.getBooleanExtra("IS_IMPORT", false)) {
-            MainActivity.start_msg.edit().putBoolean("default_config", false).apply()
+            MainActivity.start_msg!!.edit().putBoolean("default_config", false).apply()
             activity.showStartMsg()
         }
 
@@ -96,10 +96,10 @@ object RelayMainStartup {
 
         if (TunnelManager.isServiceRunning) {
             MainActivity.disableInterfaceOnConnect()
-            MainActivity.start_button.setText(R.string.stop)
+            MainActivity.start_button!!.setText(R.string.stop)
         } else {
             MainActivity.enableInterfaceOnConnect()
-            MainActivity.start_button.setText(R.string.start)
+            MainActivity.start_button!!.setText(R.string.start)
         }
 
         MainActivity.user_and_pass = activity.findViewById(R.id.activity_mainInputUserandPass)
@@ -113,23 +113,23 @@ object RelayMainStartup {
         MainActivity.direct_mode = activity.findViewById(R.id.activity_mainDirectMode)
         MainActivity.config_msg = activity.findViewById(R.id.config_msg_textview)
 
-        RelayMainAds.setup(activity, MainActivity.mAdView)
+        RelayMainAds.setup(activity, MainActivity.mAdView!!)
 
         RelayMainUi.updateLayoutWithConfig1()
         RelayMainUi.updateLayoutWithConfig2()
-        MainActivity.start_button.setOnClickListener(activity)
-        MainActivity.modo_https.setOnCheckedChangeListener(activity)
-        MainActivity.modo_http.setOnCheckedChangeListener(activity)
-        MainActivity.payload_after_tls.setOnCheckedChangeListener(activity)
-        MainActivity.direct_mode.setOnCheckedChangeListener(activity)
+        MainActivity.start_button!!.setOnClickListener(activity)
+        MainActivity.modo_https!!.setOnCheckedChangeListener(activity)
+        MainActivity.modo_http!!.setOnCheckedChangeListener(activity)
+        MainActivity.payload_after_tls!!.setOnCheckedChangeListener(activity)
+        MainActivity.direct_mode!!.setOnCheckedChangeListener(activity)
 
         RelayMainUi.updateLayoutWithConfig3()
         if (TunnelManager.isServiceRunning) {
             MainActivity.disableInterfaceOnConnect()
-            MainActivity.start_button.setText(R.string.stop)
+            MainActivity.start_button!!.setText(R.string.stop)
         } else {
             MainActivity.enableInterfaceOnConnect()
-            MainActivity.start_button.setText(R.string.start)
+            MainActivity.start_button!!.setText(R.string.start)
         }
 
         val wifiManager = activity.applicationContext
@@ -152,7 +152,7 @@ object RelayMainStartup {
             .setCancelable(true)
             .setMessage(activity.getString(R.string.start_msg_text))
             .setPositiveButton("OK") { dialog1, _ ->
-                MainActivity.app_prefs.edit().putBoolean("default_config", false).apply()
+                MainActivity.app_prefs!!.edit().putBoolean("default_config", false).apply()
                 dialog1.dismiss()
                 activity.getPermissionAndroid13()
             }

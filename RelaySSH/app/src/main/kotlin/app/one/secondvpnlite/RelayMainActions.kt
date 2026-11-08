@@ -136,7 +136,7 @@ object RelayMainActions {
     }
 
     private fun isConnected(activity: MainActivity): Boolean {
-        return MainActivity.start_button.text.toString() ==
+        return MainActivity.start_button!!.text.toString() ==
             activity.getString(R.string.stop)
     }
 

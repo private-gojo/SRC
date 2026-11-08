@@ -74,7 +74,7 @@ object RelayMainValidation {
         }
 
         if (SecondVPN.getConnectionMode() == "MODO_HTTP") {
-            if (MainActivity.direct_mode.isChecked) {
+            if (MainActivity.direct_mode!!.isChecked) {
                 if (SecondVPN.getServidorSSHDomain().isEmpty()) {
                     configIsOk = false
                 }
@@ -111,7 +111,7 @@ object RelayMainValidation {
         }
 
         if (SecondVPN.getConnectionMode() == "MODO_HTTPS") {
-            if (MainActivity.payload_after_tls.isChecked) {
+            if (MainActivity.payload_after_tls!!.isChecked) {
                 if (SecondVPN.getServidorSSHDomain().isEmpty()) {
                     configIsOk = false
                 }

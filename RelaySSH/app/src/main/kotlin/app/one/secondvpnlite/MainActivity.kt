@@ -35,7 +35,7 @@ import app.one.secondvpnlite.drawer.DrawerLog
 import app.one.secondvpnlite.service.TunnelManager
 import app.one.secondvpnlite.tunnel.TunnelUtils
 
-class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener,
+open class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener,
     View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private var mTunnelThread: Thread? = null
@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener,
 
     private fun showLog() {
         if (mDrawer != null && !isFinishing) {
-            val drawerLayout = mDrawer!!.drawerLayout
+            val drawerLayout = mDrawer!!.getDrawerLayout()
             if (!drawerLayout.isDrawerOpen(GravityCompat.END)) {
                 drawerLayout.openDrawer(GravityCompat.END)
             }
@@ -355,11 +355,11 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener,
 
         @JvmStatic
         fun ladi() {
-            RelayMainAds.loadInterstitialIfNeeded(sActivity, sContext, app_prefs, mAdView)
+            RelayMainAds.loadInterstitialIfNeeded(sActivity!!, sContext!!, app_prefs!!, mAdView!!)
         }
 
         private fun setup_ad() {
-            RelayMainAds.setup(sContext, mAdView)
+            RelayMainAds.setup(sContext!!, mAdView!!)
         }
     }
 }
