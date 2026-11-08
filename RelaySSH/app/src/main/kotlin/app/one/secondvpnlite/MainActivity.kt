@@ -35,7 +35,7 @@ import app.one.secondvpnlite.drawer.DrawerLog
 import app.one.secondvpnlite.service.TunnelManager
 import app.one.secondvpnlite.tunnel.TunnelUtils
 
-open open class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener,
+open class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener,
     View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private var mTunnelThread: Thread? = null
@@ -115,7 +115,7 @@ open open class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener,
 
     private fun showLog() {
         if (mDrawer != null && !isFinishing) {
-            val drawerLayout = mDrawer!!.getDrawerLayout()
+            val drawerLayout = mDrawer!!.getDrawerLayout()!!
             if (!drawerLayout.isDrawerOpen(GravityCompat.END)) {
                 drawerLayout.openDrawer(GravityCompat.END)
             }

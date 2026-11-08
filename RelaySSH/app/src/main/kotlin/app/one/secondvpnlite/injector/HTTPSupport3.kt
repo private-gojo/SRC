@@ -77,7 +77,6 @@ class HTTPSupport3(private val incoming: Socket) {
             )
 
             payload = applySocketRotations(payload)
-            payload = expandRepeatedMarkers(payload)
 
             writeSocketPayload(payload, outputStream)
             AppLogManager.addLog("HTTP: Sending payload")

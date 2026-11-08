@@ -52,7 +52,7 @@ object RelayMainStartup {
 
         MainActivity.mAdView = activity.findViewById(R.id.adView)
 
-        activity.mDrawer.setDrawer(activity)
+        activity.mDrawer!!.setDrawer(activity)
 
         MainActivity.app_prefs = activity.getSharedPreferences(
             SecondVPN.PREFS_GERAL,

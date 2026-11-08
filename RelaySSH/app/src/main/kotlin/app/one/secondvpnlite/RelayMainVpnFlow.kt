@@ -65,7 +65,7 @@ object RelayMainVpnFlow {
 
             if (SecondVPN.isEnableWakeLock()) {
                 try {
-                    MainActivity.wakeLock!! = (
+                    MainActivity.wakeLock = (
                         activity.getSystemService(Context.POWER_SERVICE) as PowerManager
                     ).newWakeLock(1, "SecondVPNLite::WakeLock")
                 } catch (error: Exception) {

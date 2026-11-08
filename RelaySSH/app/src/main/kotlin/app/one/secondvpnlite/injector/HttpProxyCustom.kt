@@ -125,7 +125,7 @@ class HttpProxyCustom private constructor(
         while (ClientServerHello.readLineRN(input, buffer).also { length = it } != 0) {
             completeResponse += "\n"
             completeResponse += try {
-                String(buffer, 0, length, "ISO-8859-1")
+                String(buffer, 0, length, Charset.forName("ISO-8859-1"))
             } catch (_: UnsupportedEncodingException) {
                 String(buffer, 0, length)
             }
