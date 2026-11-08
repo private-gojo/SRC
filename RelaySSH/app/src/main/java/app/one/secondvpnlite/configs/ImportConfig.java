@@ -256,7 +256,7 @@ public class ImportConfig extends AppCompatActivity {
 
                     if (isImportFromExternal){
                         Toast.makeText(this, getString(R.string.import_sucess), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this, MainActivity.class);
+                        Intent intent = new Intent(this, dev.relay.ssh.RelayMainActivity.class);
                         intent.putExtra("IS_IMPORT",true);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -264,7 +264,7 @@ public class ImportConfig extends AppCompatActivity {
                     }else{
                         Toast.makeText(this, getString(R.string.import_sucess), Toast.LENGTH_SHORT).show();
                         //Thread.sleep(5000);
-                        Intent intent = new Intent(this, MainActivity.class);
+                        Intent intent = new Intent(this, dev.relay.ssh.RelayMainActivity.class);
                         intent.putExtra("IS_IMPORT",true);
                         //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -275,7 +275,7 @@ public class ImportConfig extends AppCompatActivity {
                 }else{
                     if (isImportFromExternal){
                         Toast.makeText(this, getString(R.string.file_config_incompatible), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this, MainActivity.class);
+                        Intent intent = new Intent(this, dev.relay.ssh.RelayMainActivity.class);
                         intent.putExtra("IS_IMPORT",true);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -283,7 +283,7 @@ public class ImportConfig extends AppCompatActivity {
                     }else{
                         Toast.makeText(this, getString(R.string.file_config_incompatible), Toast.LENGTH_SHORT).show();
                         //Thread.sleep(5000);
-                        Intent intent = new Intent(this, MainActivity.class);
+                        Intent intent = new Intent(this, dev.relay.ssh.RelayMainActivity.class);
                         intent.putExtra("IS_IMPORT",true);
                         //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
