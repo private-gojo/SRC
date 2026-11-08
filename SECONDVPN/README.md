@@ -1,20 +1,20 @@
 # Second VPN
 
-## Sobre
-Realize conexões VPN sob o protocolo ssh2 usando https, proxy http ou proxy https.
+## About
+Establish VPN connections using the SSH2 protocol through HTTPS, an HTTP proxy, or an HTTPS proxy.
 
-## Descrição
-Funcionamento básico do app:
+## Description
 
-1. O usuário irá inserir uma payload (que nada mais é que a estrutura de uma requisição qualquer) e o método de conexão (que pode ser https ou http) e juntamente com o servidor que irá realizar a conexão ssh.
-2. O app irá formatar a requisição e tentar realizar a conexão sob o proxy inserido.
-3. Se bem sucedido, a autenticação do ssh será iniciada.
-4. Se autenticado, iniciamos um servidor socks local, e iniciamos o VPNService do android para usar o mesmo.
-5. Todo tráfego do dispositivo será tunelado para o socks local, que por sua vez estará ligado ao servidor ssh remoto.
+Basic application workflow:
 
-## Instalação
-Para compilar o projeto, siga estas etapas:
+1. The user enters a payload (which is essentially the structure of an arbitrary request), selects the connection method (HTTPS or HTTP), and provides the server that will handle the SSH connection.
+2. The app formats the request and attempts to establish a connection through the specified proxy.
+3. If successful, SSH authentication begins.
+4. Once authenticated, the app starts a local SOCKS server and launches the Android VPNService to use it.
+5. All device traffic is tunneled through the local SOCKS server, which is connected to the remote SSH server.
 
-1. Clone o repositório.
-2. Importe-o no Android Studio.
+## Installation
+To build the project, follow these steps:
 
+1. Clone the repository.
+2. Import the project into Android Studio.
