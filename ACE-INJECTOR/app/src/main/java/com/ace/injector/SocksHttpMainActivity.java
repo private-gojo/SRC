@@ -186,49 +186,7 @@ CompoundButton.OnCheckedChangeListener, SkStatus.StateListener, RewardedVideoAdL
 	private TextView activitymainTextView1;
 	private LogsAdapter mLogAdapter;
 	
-	private String[] torrentList = new String[] {
-		"com.termux",
-		"com.tdo.showbox",
-		"com.nitroxenon.terrarium",
-		"com.pklbox.translatorspro",
-		"com.xunlei.downloadprovider",
-		"com.epic.app.iTorrent",
-		"hu.bute.daai.amorg.drtorrent",
-		"com.mobilityflow.torrent.prof",
-		"com.brute.torrentolite",
-		"com.nebula.swift",
-		"tv.bitx.media",
-		"com.DroiDownloader",
-		"bitking.torrent.downloader",
-		"org.transdroid.lite",
-		"com.mobilityflow.tvp",
-		"com.gabordemko.torrnado",
-		"com.frostwire.android",
-		"com.vuze.android.remote",
-		"com.akingi.torrent",
-		"com.utorrent.web",
-		"com.paolod.torrentsearch2",
-		"com.delphicoder.flud.paid",
-		"com.teeonsoft.ztorrent",
-		"megabyte.tdm",
-		"com.bittorrent.client.pro",
-		"com.mobilityflow.torrent",
-		"com.utorrent.client",
-		"com.utorrent.client.pro",
-		"com.bittorrent.client",
-		"torrent",
-		"com.AndroidA.DroiDownloader",
-		"com.indris.yifytorrents",
-		"com.delphicoder.flud",
-		"com.oidapps.bittorrent",
-		"dwleee.torrentsearch",
-		"com.vuze.torrent.downloader",
-		"megabyte.dm",
-		"com.fgrouptech.kickasstorrents",
-		"com.jrummyapps.rootbrowser.classic",
-		"com.bittorrent.client",
-		"hu.tagsoft.ttorrent.lite",
-		"co.we.torrent"};
+
 		
 	private CheckBox startSSHCheckbox;
 	private CheckBox dnsCheckBox;
