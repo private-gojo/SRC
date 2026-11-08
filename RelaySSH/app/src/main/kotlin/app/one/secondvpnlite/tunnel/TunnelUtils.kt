@@ -181,9 +181,7 @@ object TunnelUtils {
                         }
                     }
                 }
-                return delimiter == "[split_delay]" || delimiter == "[delay]" ||
-                    delimiter == "[split]" || delimiter == "[splitNoDelay]" ||
-                    delimiter == "[instant_split]"
+                return delimiter == "[split_delay]"
             }
         }
         return false

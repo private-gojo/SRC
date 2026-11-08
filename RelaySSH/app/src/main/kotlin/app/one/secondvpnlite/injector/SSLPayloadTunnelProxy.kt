@@ -107,7 +107,7 @@ class SSLPayloadTunnelProxy(
             var length = ClientServerHello.readLineRN(input, buffer)
 
             val responseFirstLine = try {
-                String(buffer, 0, length, "ISO-8859-1")
+                String(buffer, 0, length, Charset.forName("ISO-8859-1"))
             } catch (_: UnsupportedEncodingException) {
                 String(buffer, 0, length)
             }
@@ -126,7 +126,7 @@ class SSLPayloadTunnelProxy(
             while (ClientServerHello.readLineRN(input, buffer).also { length = it } != 0) {
                 responseAll += "\n"
                 responseAll += try {
-                    String(buffer, 0, length, "ISO-8859-1")
+                    String(buffer, 0, length, Charset.forName("ISO-8859-1"))
                 } catch (_: UnsupportedEncodingException) {
                     String(buffer, 0, length)
                 }

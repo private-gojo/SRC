@@ -132,7 +132,7 @@ class TetheringServer : Runnable {
         }
     }
 
-    class Handler private constructor(private val connection: Socket) : Thread() {
+    class Handler(private val connection: Socket) : Thread() {
         override fun run() {
             try {
                 val requestLine = getLine(connection.getInputStream())
@@ -316,11 +316,8 @@ class TetheringServer : Runnable {
             val colonIndex = line.indexOf(":")
             if (colonIndex != -1) {
                 val headerName = line.substring(0, colonIndex).trim()
-                return headerName.regionMatches(
-                    true, 0, HEADER_CONNECTION, 0, HEADER_CONNECTION.length
-                ) || headerName.regionMatches(
-                    true, 0, HEADER_PROXY_CONNECTION, 0, HEADER_PROXY_CONNECTION.length
-                )
+                return headerName.startsWith(HEADER_CONNECTION, ignoreCase = true) ||
+                    headerName.startsWith(HEADER_PROXY_CONNECTION, ignoreCase = true)
             }
             return false
         }
