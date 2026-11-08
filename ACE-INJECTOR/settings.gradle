@@ -1,2 +1,2 @@
-include ':service', ':app'
+include ':app'
 rootProject.name = "SocksHttp"
