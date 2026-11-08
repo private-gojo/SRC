@@ -350,144 +350,9 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Menu Itens
-        switch (item.getItemId()) {
-            case R.id.import_file:
-                intentToImport = true;
-                if (start_button.getText().toString().equals(this.getString(R.string.stop))) {
-                    Toast.makeText(this,this.getString(R.string.only_disconnected),Toast.LENGTH_SHORT).show();
-                }else{
-                    Intent import_file = new Intent(this, ImportConfig.class);
-                    this.startActivity(import_file);
-                }
-
-            break;
-
-            case R.id.clearlogs:
-                AppLogManager.clearLog();
-                //AppLogManager.addLog(getString(R.string.cleared_logs));
-                break;
-            case R.id.clearconfig:
-                if (start_button.getText().toString().equals(this.getString(R.string.stop))) {
-                    Toast.makeText(this,this.getString(R.string.only_disconnected),Toast.LENGTH_SHORT).show();
-                }else{
-                   // AlertDialog.Builder builder = new AlertDialog.Builder(this,AlertDialog.THEME_DEVICE_DEFAULT_DARK);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.AlertDialogTheme);
-                    builder.setTitle(getString(R.string.reset_app_config_title));
-                    builder.setCancelable(true)
-                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    SecondVPN.setDefaultPrefs();
-                                    clear_textviews();
-                                    updateUIAfterImport();
-                                }
-                            })
-                            .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-
-                }
-                break;
-            case R.id.forcestop:
-                android.os.Process.killProcess(android.os.Process.myPid());
-
-                break;
-            case R.id.cleardata:
-
-                if (start_button.getText().toString().equals(this.getString(R.string.stop))) {
-                    Toast.makeText(this,this.getString(R.string.only_disconnected),Toast.LENGTH_SHORT).show();
-                }else{
-                   // AlertDialog.Builder builder = new AlertDialog.Builder(this,AlertDialog.THEME_DEVICE_DEFAULT_DARK);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.AlertDialogTheme);
-                    builder.setTitle(getString(R.string.reset_app_title));
-                    builder.setMessage(getString(R.string.reset_app_txt))
-                            .setCancelable(true)
-                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    try{
-                                        String packageName = getApplicationContext().getPackageName();
-                                        Runtime runtime = Runtime.getRuntime();
-                                        runtime.exec("pm clear "+packageName);
-                                    } catch (Exception e) {
-                                        Toast.makeText(MainActivity.this, getString(R.string.operation_failed), Toast.LENGTH_SHORT).show();
-                                        e.printStackTrace();
-                                    }
-                                }
-                            })
-                            .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-
-
-
-                break;
-
-            case R.id.export_file:
-                savePreferences();
-                if (start_button.getText().toString().equals(this.getString(R.string.stop))) {
-                    Toast.makeText(this,this.getString(R.string.only_disconnected),Toast.LENGTH_SHORT).show();
-                }else if (!checkConfig(true)){
-                    if(exportWithoutLogin){
-                        if (!SecondVPN.getIsCustomFileIsLocked()){
-                            //ATIVIDADE EXPORTAR
-                            Intent export_file = new Intent(this, ExportConfig.class);
-                            this.startActivity(export_file);
-                        }else{
-                            Toast.makeText(this,this.getString(R.string.block_by_config_author),Toast.LENGTH_LONG).show();
-                        }
-                    }else{
-                        Toast.makeText(this,this.getString(R.string.empty_configs_export),Toast.LENGTH_LONG).show();
-                    }
-                }else if (SecondVPN.getIsCustomFileLockSettings()){
-                    Toast.makeText(this,this.getString(R.string.block_by_config_author),Toast.LENGTH_LONG).show();
-                }else{
-                    if (!SecondVPN.getIsCustomFileIsLocked()){
-                        //ATIVIDADE EXPORTAR
-                        Intent export_file = new Intent(this, ExportConfig.class);
-                        this.startActivity(export_file);
-                    }else{
-                        Toast.makeText(this,this.getString(R.string.block_by_config_author),Toast.LENGTH_LONG).show();
-                    }
-                }
-            break;
-
-            case R.id.settings:
-                if (start_button.getText().toString().equals(this.getString(R.string.stop))) {
-                    Toast.makeText(this,this.getString(R.string.only_disconnected),Toast.LENGTH_SHORT).show();
-                }else if (SecondVPN.getIsCustomFileLockSettings()){
-                    Toast.makeText(this,this.getString(R.string.block_by_config_author),Toast.LENGTH_LONG).show();
-
-                }else{
-                    Intent settings = new Intent(this, AppSettings.class);
-                    this.startActivity(settings);
-                }
-            break;
-
-            case R.id.minimize:
-                Intent startMain = new Intent(Intent.ACTION_MAIN);
-                startMain.addCategory(Intent.CATEGORY_HOME);
-                startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(startMain);
-             break;
-
-            case R.id.exit_app:
-                finishAffinity();
-            break;
-
-        }
-
+        RelayMainActions.handleOptionsMenu(this, item);
         return super.onOptionsItemSelected(item);
     }
 
@@ -499,19 +364,35 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
      */
     @Override
     public void onClick(View v) {
-        {
-            switch (v.getId()) {
-                case R.id.activity_StartConnection:
-                    setStartOrStopVPN(this);
-                    break;
+        RelayMainActions.onClick(this, v);
+    }
 
-                case R.id.logs:
-                    showLog();
-                    break;
+    void setStartOrStopVPNFromActions() {
+        setStartOrStopVPN(this);
+    }
 
-            }
+    void showLogFromActions() {
+        showLog();
+    }
 
-        }
+    void setIntentToImportFromActions() {
+        intentToImport = true;
+    }
+
+    boolean checkConfigFromActions(boolean istoSave) {
+        return checkConfig(istoSave);
+    }
+
+    boolean isExportWithoutLoginFromActions() {
+        return exportWithoutLogin;
+    }
+
+    void clearTextviewsFromActions() {
+        clear_textviews();
+    }
+
+    void savePreferencesFromActions() {
+        savePreferences();
     }
 
     private void setStartOrStopVPN(MainActivity mainActivity) {
@@ -564,10 +445,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
      */
     @Override
     public void onDrawerClosed(@NonNull View drawerView) {
-        if (drawerView.getId() == R.id.activity_mainLogsDrawerLinear) {
-            app_toolbar.getMenu().clear();
-            getMenuInflater().inflate(R.menu.main_menu, app_toolbar.getMenu());
-        }
+        RelayMainActions.onDrawerClosed(this, drawerView);
     }
 
     /**
